@@ -19,13 +19,14 @@
   --grad:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.06));
   --hover:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.12));
   --radius:26px;--focus:rgba(255,255,255,.45);
+  --accent:#78c8ff;
   font-family:'Poppins',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
-ul,li{list-style:none;margin:0;padding:0}
+ul,li{list-style:none}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:8px}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#252629;border-radius:20px}
 
@@ -45,9 +46,9 @@ mix-blend-mode:screen;animation:aur 24s ease-in-out infinite}
 #bgCar .car-img{position:absolute;inset:0;background:url("assets/backgrounds/car.jpg") center/cover no-repeat;opacity:.44;filter:contrast(1.07) brightness(.87)}
 #bgCar .wash{position:absolute;inset:0;
  background:
-   radial-gradient(circle at 70% 55%,rgba(255,0,0,.28),transparent 60%),
-   radial-gradient(circle at 35% 40%,rgba(0,160,110,.25),transparent 65%),
-   linear-gradient(#050607,#0a0d11);mix-blend-mode:screen}
+ radial-gradient(circle at 70% 55%,rgba(255,0,0,.28),transparent 60%),
+ radial-gradient(circle at 35% 40%,rgba(0,160,110,.25),transparent 65%),
+ linear-gradient(#050607,#0a0d11);mix-blend-mode:screen}
 #bgCar .vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,rgba(0,0,0,0) 0%,rgba(0,0,0,.42) 55%,#000 100%)}
 .smoke{position:absolute;width:160%;height:160%;top:50%;left:50%;transform:translate(-50%,-50%);
 background:
@@ -69,7 +70,6 @@ background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.085),rgba(0,0,0,.
 conic-gradient(from 0deg,rgba(255,255,255,.22),transparent 40%,transparent 60%,rgba(255,255,255,.22));
 animation:spin 3s linear infinite;mix-blend-mode:overlay;opacity:.7}
 .fade-out{animation:fout .55s ease forwards}@keyframes fout{to{opacity:0;visibility:hidden}}
-body.modal-open{overflow:hidden}
 
 /* TOPBAR */
 .topbar{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;
@@ -79,10 +79,12 @@ padding:10px 22px;background:rgba(15,16,20,.55);backdrop-filter:blur(18px) satur
 /* PAGE & CARDS */
 .page{display:flex;flex-direction:column;gap:30px;align-items:center;padding:26px 18px 80px}
 .card{width:100%;max-width:1180px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-backdrop-filter:blur(20px) saturate(165%);padding:34px 36px;position:relative;overflow:hidden}
+backdrop-filter:blur(20px) saturate(165%);padding:34px 36px;position:relative;overflow:hidden;transition:background .35s,border-color .35s}
 .card:after{content:"";position:absolute;inset:-1px;padding:1px;border-radius:inherit;background:
-linear-gradient(140deg,rgba(255,255,255,.12),transparent);
--webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+linear-gradient(140deg,rgba(255,255,255,.12),transparent 60%);
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.compact .card{padding:22px 24px}
 
 /* HERO */
 .hero{display:grid;grid-template-columns:230px 1fr;gap:42px}
@@ -91,7 +93,7 @@ linear-gradient(140deg,rgba(255,255,255,.12),transparent);
 .avatar{width:190px;height:190px;border-radius:50%;border:5px solid rgba(255,255,255,.55);object-fit:cover;
 box-shadow:0 0 0 7px rgba(255,255,255,.09),0 20px 50px -12px rgba(0,0,0,.75)}
 .name{margin:0 0 16px;font-size:clamp(2.35rem,2.6vw + 1rem,3.15rem);font-weight:700;display:flex;align-items:center;gap:10px;letter-spacing:.65px;flex-wrap:wrap}
-.status-dot-inline{width:12px;height:12px;border-radius:50%;background:#2fd06d;border:2px solid #0c0f12;box-shadow:0 0 4px #2fd06d,0 0 10px #2fd06d;display:inline-block}
+.status-dot-inline{width:12px;height:12px;border-radius:50%;background:#2fd06d;border:2px solid #0c0f12;box-shadow:0 0 4px #2fd06d,0 0 10px #2fd06d}
 .bio{margin:8px 0 34px;color:var(--muted);line-height:1.55;max-width:74ch;letter-spacing:.25px}
 
 /* SOCIAL */
@@ -109,27 +111,19 @@ font-size:.85rem;font-weight:600;cursor:pointer;transition:transform .26s,border
 .s-thumb{width:48px;height:48px;border-radius:15px;overflow:hidden;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
 
 /* STATS */
-.stats{display:flex;flex-wrap:wrap;gap:22px;padding:4px 2px 2px;justify-content:center}
-.stat-chip{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.17);padding:14px 18px;border-radius:16px;font-size:.82rem;font-weight:600;letter-spacing:.4px;min-width:160px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default}
+.stats{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
+.stat-chip{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.17);padding:14px 18px;border-radius:16px;font-size:.82rem;font-weight:600;letter-spacing:.4px;min-width:160px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default;transition:box-shadow .35s}
 .stat-chip.dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.4)}
-.stat-chip[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
 
 /* SECTION TITLE */
-.section-title{margin:0 0 24px;font-size:1.26rem;letter-spacing:.55px;font-weight:600;display:flex;align-items:center;gap:10px;cursor:default}
-.section-title[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
-
-/* DRAG highlight */
-.owner-mode [data-owner-block]{position:relative}
-.owner-mode [data-owner-block]:hover{outline:1px dashed rgba(255,255,255,.35)}
-.owner-mode [data-owner-block].dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.55)}
+.section-title{margin:0 0 24px;font-size:1.26rem;letter-spacing:.55px;font-weight:600;display:flex;align-items:center;gap:10px}
 
 /* SERVERS */
 .servers .grid{display:flex;flex-wrap:wrap;gap:22px}
 .srv-card{position:relative;border-radius:24px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.16);width:232px;min-height:205px;display:flex;flex-direction:column;cursor:pointer;overflow:hidden;
-transition:transform .28s,border-color .28s,box-shadow .4s}
-.srv-card.dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.4)}
+transition:transform .28s,border-color .28s,box-shadow .4s,filter .4s}
 .srv-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3);box-shadow:0 14px 40px -12px rgba(0,0,0,.75)}
-.srv-card.now-focus{box-shadow:0 0 0 2px rgba(120,200,255,.65),0 0 22px -4px rgba(120,200,255,.85)}
+.srv-card.now-focus{box-shadow:0 0 0 2px var(--accent),0 0 22px -4px var(--accent)}
 .sheen{position:absolute;inset:0;background:linear-gradient(125deg,transparent 35%,rgba(255,255,255,.15) 52%,transparent 70%);opacity:0;transition:opacity .45s;pointer-events:none}
 .srv-card:hover .sheen{opacity:1}
 .srv-inner{display:flex;flex-direction:column;padding:16px 18px 14px;flex:1}
@@ -137,25 +131,17 @@ transition:transform .28s,border-color .28s,box-shadow .4s}
 .srv-logo{width:72px;height:72px;border-radius:20px;background:#101114;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,.18);position:relative}
 .srv-logo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .srv-card:hover .srv-logo img{transform:scale(1.07)}
-.srv-meta h3{margin:0;font-size:.95rem;font-weight:700;letter-spacing:.3px;cursor:default}
-.srv-meta h3[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
+.srv-meta h3{margin:0;font-size:.95rem;font-weight:700;letter-spacing:.3px}
 .srv-year{color:var(--muted);font-size:.63rem;letter-spacing:.5px}
-.srv-roles{margin:10px 0 0;color:#dadade;font-size:.68rem;line-height:1.45;letter-spacing:.32px;flex:1;cursor:default;white-space:pre-line}
-.srv-roles[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
+.srv-roles{margin:10px 0 0;color:#dadade;font-size:.68rem;line-height:1.45;letter-spacing:.32px;flex:1;white-space:pre-line}
 .srv-btn{margin-top:12px;border:1px solid rgba(255,255,255,.25);background:var(--grad);color:#fff;height:42px;border-radius:14px;cursor:pointer;font-size:.68rem;font-weight:600;letter-spacing:.5px;
 transition:transform .26s,background .26s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-.srv-btn i{font-size:.9em;transform:translateY(1px)}
 .srv-btn:hover{transform:translateY(-4px);background:var(--hover)}
-.srv-btn:active{transform:translateY(-1px)}
 
 /* ACHIEVEMENTS */
 .achievements{display:flex;flex-direction:column;gap:26px}
 .ach-lists{display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(350px,1fr))}
 .ach-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);padding:20px 22px 22px;border-radius:22px;display:flex;flex-direction:column;gap:14px}
-.ach-box h3{margin:0;font-size:.9rem;letter-spacing:.58px;text-transform:uppercase;color:#e5e5ea;cursor:default}
-.ach-box h3[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
-.ach-box li{font-size:.68rem;display:flex;align-items:flex-start;gap:8px;line-height:1.48;letter-spacing:.42px;color:#f0f0f4;cursor:default}
-.ach-box li[contenteditable="true"]{outline:2px solid rgba(255,255,255,.45);border-radius:6px;padding:2px 4px}
 
 /* MUSIC */
 .music.card{padding:28px 32px 34px}
@@ -165,16 +151,10 @@ transition:transform .26s,background .26s;display:inline-flex;align-items:center
 #musicState{font-size:.65rem;color:#d0d0d6;letter-spacing:.5px;font-weight:600}
 
 /* PANELS */
-.panel-grid{display:flex;flex-direction:column;gap:30px}
-.panels-horizontal{display:flex;flex-wrap:wrap;gap:20px}
-.panels-horizontal .mini-panel{flex:1 1 clamp(240px,24%,300px);min-width:240px}
 .mini-panel.card{padding:24px 26px 26px;position:relative}
-.mini-panel.card.dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.4)}
 .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.panel-head h3{margin:0;font-size:.78rem;letter-spacing:.6px;text-transform:uppercase;color:#e3e3ea;cursor:default}
-.panel-head h3[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
-.inline-edit{cursor:default;position:relative;padding:14px 14px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.09);font-size:.72rem;min-height:54px;line-height:1.55;white-space:pre-wrap;text-align:center}
-.inline-edit[contenteditable="true"]{cursor:text;outline:2px solid rgba(255,255,255,.55)}
+.panel-head h3{margin:0;font-size:.78rem;letter-spacing:.6px;text-transform:uppercase;color:#e3e3ea}
+.inline-edit{position:relative;padding:14px 14px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.09);font-size:.72rem;min-height:54px;line-height:1.55;white-space:pre-wrap;text-align:center}
 .objectives-list{display:grid;gap:9px;font-size:.68rem}
 .objectives-list li{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.085);border-radius:14px;cursor:pointer;transition:background .3s,border-color .3s}
 .objectives-list li.done{opacity:.55;text-decoration:line-through}
@@ -195,86 +175,24 @@ transition:transform .26s,background .26s;display:inline-flex;align-items:center
 .last-update{font-size:.65rem;color:#d4d5da;letter-spacing:.5px;line-height:1.5;word-break:break-word}
 .footer{text-align:center;font-size:.64rem;color:var(--muted);letter-spacing:.55px;padding-top:10px}
 
-/* ADMIN / OWNER */
-[data-admin]{display:none !important;}
+/* ADMIN */
 .admin-mode [data-admin]{display:inline-flex !important;}
+[data-admin]{display:none !important;}
 .admin-mode .add-row[data-admin]{display:flex !important;}
-.owner-mode .srv-card,
-.owner-mode .mini-panel,
-.owner-mode .stat-chip,
-.owner-mode [data-owner-block]{cursor:move}
-.owner-mode [data-owner-editable]{transition:outline .25s}
-.owner-mode [data-owner-editable]:hover{outline:1px dashed rgba(255,255,255,.35)}
-.owner-mode [contenteditable="true"]{outline:2px solid rgba(255,255,255,.55)!important;border-radius:6px;padding:2px 4px}
-
-/* MODES */
-.clean-mode .servers,
-.clean-mode .achievements,
-.clean-mode .music,
-.clean-mode .stats{display:none!important}
-.streaming-mode .music,
-.streaming-mode #debugPanel{display:none!important}
-.streaming-mode .badge-mode{display:block !important;background:#0091ff;box-shadow:0 0 0 2px rgba(0,145,255,.5),0 0 16px -2px rgba(0,145,255,.85)}
-
-/* BUTTONS */
-.btn{
-  --h:44px;height:var(--h);padding:0 18px;border-radius:16px;border:1px solid rgba(255,255,255,.22);background:var(--grad);
-  color:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:.7rem;letter-spacing:.52px;
-  position:relative;transition:transform .25s,background .25s;gap:8px}
-.btn i{line-height:0;font-size:.9em;transform:translateY(1px)}
-.btn:hover{transform:translateY(-4px);background:var(--hover)}
-.btn:active{transform:translateY(-2px)}
-.btn.small{--h:36px;padding:0 14px;font-size:.58rem;letter-spacing:.55px}
-.btn.icon{width:44px;padding:0;justify-content:center;gap:0}
-.btn.icon i{transform:none}
-.btn.danger{background:linear-gradient(180deg,rgba(255,60,90,.42),rgba(255,60,90,.18));border-color:rgba(255,90,120,.45)}
-.btn.danger:hover{background:linear-gradient(180deg,rgba(255,60,90,.55),rgba(255,60,90,.25))}
-.btn.is-active{box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 10px -2px rgba(255,255,255,.6);background:var(--hover)}
-
-.mode-toggle-bar{display:flex;gap:10px;align-items:center}
-.mode-btn{--h:38px;height:var(--h);padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.25);
-  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
-  font-size:.62rem;letter-spacing:.6px;font-weight:600;cursor:pointer;color:#fff;display:inline-flex;align-items:center;gap:8px;
-  transition:background .25s,box-shadow .25s,transform .25s}
-.mode-btn i{line-height:0;font-size:.9em;transform:translateY(1px)}
-.mode-btn:hover{transform:translateY(-3px);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.09))}
-.mode-btn.is-active{background:linear-gradient(180deg,rgba(120,200,255,.38),rgba(120,200,255,.15));
-  box-shadow:0 0 0 1px rgba(120,200,255,.7),0 0 14px -2px rgba(120,200,255,.9);border-color:rgba(120,200,255,.7)}
-
-/* MODAL */
-#serverOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:220;background:rgba(0,0,0,.55);backdrop-filter:blur(8px)}
-#serverOverlay.open{display:flex}
-.server-modal-box{width:min(92vw,720px);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:30px;
-padding:26px 28px 32px;position:relative;animation:mIn .35s ease}
-@keyframes mIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.modal-close{position:absolute;top:14px;right:14px;width:46px;height:46px;border:1px solid rgba(255,255,255,.24);
-background:var(--grad);border-radius:15px;color:#fff;cursor:pointer;display:grid;place-items:center}
-.modal-head{display:flex;align-items:center;gap:22px;padding:10px 0 22px;border-bottom:1px solid rgba(255,255,255,.13)}
-.modal-logo{width:66px;height:66px;border-radius:19px;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.08));display:grid;place-items:center;font-weight:800;font-size:1rem;overflow:hidden;color:#fff}
-.modal-content{padding:24px 4px 20px;display:flex;flex-direction:column;gap:16px}
-.server-desc{font-size:.7rem;line-height:1.5;color:#d7d7dd;letter-spacing:.4px;white-space:pre-line}
-.server-tags{display:flex;flex-wrap:wrap;gap:8px}
-.server-tag{font-size:.58rem;padding:6px 8px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.13);border-radius:8px;letter-spacing:.5px;font-weight:600}
-
-/* SETTINGS PANEL */
-#settingsPanel{position:fixed;top:0;right:-400px;width:380px;height:100vh;z-index:250;
-  background:rgba(14,14,18,.95);backdrop-filter:blur(22px) saturate(170%);border-left:1px solid rgba(255,255,255,.18);
-  display:flex;flex-direction:column;padding:26px 28px 36px;transition:right .55s cubic-bezier(.68,.05,.25,1)}
-#settingsPanel.open{right:0}
-#settingsPanel h3{margin:0 0 20px;font-size:1.05rem;font-weight:600;letter-spacing:.58px}
-#settingsClose{position:absolute;top:14px;right:14px;width:46px;height:46px;border:1px solid rgba(255,255,255,.24);background:var(--grad);color:#fff;border-radius:15px;cursor:pointer;display:grid;place-items:center}
-.setting-block{margin-bottom:22px}
-.setting-block .title{font-size:.62rem;letter-spacing:.65px;text-transform:uppercase;font-weight:600;margin:0 0 12px;color:#dedee4}
-.setting-row{display:flex;flex-wrap:wrap;gap:16px;font-size:.67rem;letter-spacing:.47px}
-.setting-row label{display:flex;align-items:center;gap:6px;cursor:pointer}
-.setting-block input[type=url]{width:100%;padding:10px 12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);
-  border-radius:10px;color:#fff;font-size:.64rem}
-#settingsSave{margin-top:6px;width:100%}
+.admin-mode .editable-active [data-editable]{outline:1px dashed rgba(255,255,255,.35);cursor:text}
+.admin-mode .drag-active [data-draggable]{cursor:move}
+.admin-toolbar{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:8px;z-index:500}
+.admin-toolbar button{background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.05));
+border:1px solid rgba(255,255,255,.25);color:#fff;padding:9px 12px;font-size:.58rem;letter-spacing:.55px;
+border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:6px;min-width:130px;justify-content:center;transition:background .25s,transform .25s}
+.admin-toolbar button:hover{background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.09));transform:translateY(-3px)}
+.admin-toolbar button.active{box-shadow:0 0 0 1px var(--accent),0 0 12px -2px var(--accent)}
+.admin-toolbar .row{display:flex;flex-wrap:wrap;gap:8px}
 
 /* TOAST */
 #toast{position:fixed;left:50%;bottom:36px;transform:translate(-50%,22px);background:rgba(0,0,0,.75);
 padding:14px 22px;border-radius:16px;border:1px solid rgba(255,255,255,.24);
-font-size:.62rem;letter-spacing:.55px;opacity:0;pointer-events:none;z-index:400;transition:opacity .45s,transform .45s}
+font-size:.62rem;letter-spacing:.55px;opacity:0;pointer-events:none;z-index:600;transition:opacity .45s,transform .45s}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* DEBUG */
@@ -284,20 +202,33 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
 #debugPanel.show{display:block}
 #debugPanel pre{margin:8px 0 0;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,monospace;font-size:.58rem}
 
-/* RIPPLE & CURSOR */
-.ripple{position:absolute;border-radius:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,.35);
-width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forwards}
-@keyframes ripple{from{opacity:.6}to{width:240px;height:240px;opacity:0}}
-.cursor-dot,.cursor-ring{display:none}
-.cursor-ring.glow{box-shadow:0 0 14px rgba(255,255,255,.5),0 0 34px rgba(255,255,255,.25)}
+/* CONFETTI CANVAS */
+#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:450}
 
-@media (prefers-reduced-motion:reduce){
-  .smoke,.aur,.entry-ring{animation:none!important}
-  .srv-card,.s-card,.btn,.icon-btn{transition:none!important}
+/* ACCENT PULSE FOCUS */
+.focus-pulse .srv-card.now-focus{animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 2px var(--accent),0 0 18px -4px var(--accent)}
+  50%{box-shadow:0 0 0 4px var(--accent),0 0 34px -4px var(--accent)}
 }
+
+/* COMPACT MODE */
+.compact .mini-panel.card{padding:18px 20px 20px}
+.compact .music.card{padding:22px 24px 24px}
+.compact .ach-box{padding:16px 18px 18px}
+.compact .hero{gap:28px}
+.compact .social-icons{padding:12px 14px}
+
+/* DETAILS (EXTRAS) */
+#extrasWrapper{width:100%;max-width:1180px}
+#extrasWrapper details{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px}
+#extrasWrapper summary{cursor:pointer;list-style:none;font-size:.78rem;letter-spacing:.6px;font-weight:600;display:flex;align-items:center;gap:8px}
+#extrasWrapper summary::-webkit-details-marker{display:none}
+#extrasInner{display:grid;gap:20px;margin-top:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 </style>
 </head>
 <body>
+<canvas id="confettiCanvas"></canvas>
 <div class="bg">
   <canvas id="bgParticles"></canvas>
   <div id="bgAurora"><div class="aur" id="a1"></div><div class="aur" id="a2"></div><div class="aur" id="a3"></div></div>
@@ -307,14 +238,14 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
 
 <div id="entry" class="entry">
   <div class="entry-box">
-    <h1 class="entry-title" data-owner-editable>BestArcher_</h1>
+    <h1 class="entry-title" data-editable>BestArcher_</h1>
     <p class="entry-sub">CLICK ANYWHERE TO ENTER</p>
     <div class="entry-ring"></div>
   </div>
 </div>
 
-<nav class="topbar" data-owner-block>
-  <div class="brand" data-owner-editable><span>BestArcher_</span></div>
+<nav class="topbar" data-draggable>
+  <div class="brand" data-editable><span>BestArcher_</span></div>
   <div style="display:flex;gap:10px;align-items:center">
     <button id="openSettings" class="btn small" type="button"><i class="fa-solid fa-gear"></i> Settings</button>
     <button id="toggleDebug" class="btn small" type="button" hidden><i class="fa-solid fa-bug"></i> Debug</button>
@@ -331,18 +262,17 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
 <main class="page" id="appRoot">
 
   <!-- 1 PERFIL -->
-  <header class="hero card" id="heroSection" data-owner-block>
+  <header class="hero card" id="heroSection" data-draggable>
     <div class="avatar-wrap">
       <img class="avatar" src="assets/profile.jpg" alt="Perfil">
     </div>
     <div>
-      <h1 class="name" data-owner-editable>BestArcher_ <span class="status-dot-inline"></span></h1>
-      <p class="bio" data-owner-editable>Learning the best SS method · SS Verify Experience · SS Manager Experience · Staff on DynamicPvP</p>
+      <h1 class="name" data-editable>BestArcher_ <span class="status-dot-inline"></span></h1>
+      <p class="bio" data-editable>Learning the best SS method · SS Verify Experience · SS Manager Experience · Staff on DynamicPvP</p>
 
-      <div class="social-hub" id="socialHub">
+      <div class="social-hub">
         <div class="social-icons">
           <a class="icon-btn" href="https://namemc.com/profile/BestArcher_" target="_blank"><i class="fa-solid fa-user"></i></a>
-            <!-- Email button (lo mantenemos, quitaste solo la tarjeta) -->
           <a class="icon-btn" href="https://www.instagram.com/tomas_attanzio/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
           <a class="icon-btn" href="https://discord.com/users/1159617478725480580" target="_blank"><i class="fa-brands fa-discord"></i></a>
           <a class="icon-btn" href="https://github.com/BravveSS" target="_blank"><i class="fa-brands fa-github"></i></a>
@@ -352,35 +282,34 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
           <button class="icon-btn" data-copy="tomasattanzioc@gmail.com" title="Copiar correo"><i class="fa-solid fa-envelope"></i></button>
         </div>
 
-        <!-- Tarjetas: Quitada la de Email -->
         <div class="social-grid" id="socialGrid">
           <div class="s-card" data-copy="BestArcher_">
             <div class="s-thumb"><img src="assets/social/discord.png" alt="Discord"></div>
-            <span data-owner-editable>Discord ID</span><small>Copiar</small>
+            <span data-editable>Discord ID</span><small>Copiar</small>
           </div>
           <a class="s-card" href="https://github.com/BravveSS" target="_blank">
             <div class="s-thumb"><img src="assets/social/github.png" alt="GitHub"></div>
-            <span data-owner-editable>GitHub</span><small>Perfil</small>
+            <span data-editable>GitHub</span><small>Perfil</small>
           </a>
           <a class="s-card" href="https://www.instagram.com/tomas_attanzio/" target="_blank">
             <div class="s-thumb"><img src="assets/social/instagram.png" alt="Instagram"></div>
-            <span data-owner-editable>Instagram</span><small>Ver</small>
+            <span data-editable>Instagram</span><small>Ver</small>
           </a>
-          <a class="s-card" href="https://www.paypal.com/paypalme/my/profile" target="_blank">
+            <a class="s-card" href="https://www.paypal.com/paypalme/my/profile" target="_blank">
             <div class="s-thumb"><img src="assets/social/paypal.png" alt="PayPal"></div>
-            <span data-owner-editable>PayPal</span><small>Support</small>
+            <span data-editable>PayPal</span><small>Support</small>
           </a>
           <a class="s-card" href="https://namemc.com/profile/BestArcher_" target="_blank">
             <div class="s-thumb"><img src="assets/social/namemc.png" alt="NameMC"></div>
-            <span data-owner-editable>NameMC</span><small>Skin</small>
+            <span data-editable>NameMC</span><small>Skin</small>
           </a>
           <a class="s-card" href="https://www.tiktok.com/@tomasattanzio" target="_blank">
             <div class="s-thumb"><img src="assets/social/tiktok.png" alt="TikTok"></div>
-            <span data-owner-editable>TikTok</span><small>Perfil</small>
+            <span data-editable>TikTok</span><small>Perfil</small>
           </a>
           <a class="s-card" href="https://www.youtube.com/@144_hz" target="_blank">
             <div class="s-thumb"><img src="assets/social/youtube.png" alt="YouTube"></div>
-            <span data-owner-editable>YouTube</span><small>Channel</small>
+            <span data-editable>YouTube</span><small>Channel</small>
           </a>
         </div>
       </div>
@@ -388,100 +317,91 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
   </header>
 
   <!-- 2 SERVIDORES -->
-  <section class="servers card" id="serversSection" data-owner-block>
-    <h2 class="section-title" data-owner-editable><i class="fa-solid fa-server"></i> Servidores</h2>
+  <section class="servers card" id="serversSection" data-draggable>
+    <h2 class="section-title" data-editable><i class="fa-solid fa-server"></i> Servidores</h2>
     <div class="grid" id="serversGrid">
-      <article class="srv-card now-focus" data-name="DynoPvP" data-logo="assets/dynopvp.png">
+      <article class="srv-card now-focus" data-name="DynoPvP" data-logo="assets/dynopvp.png" data-draggable>
         <div class="sheen"></div><div class="srv-inner">
           <div class="srv-top">
             <div class="srv-logo"><img src="assets/dynopvp.png" alt="DynoPvP"></div>
-            <div class="srv-meta"><h3 data-owner-editable>DynoPvP</h3><span class="srv-year" data-owner-editable>2023</span></div>
+            <div class="srv-meta"><h3 data-editable>DynoPvP</h3><span class="srv-year" data-editable>2023</span></div>
           </div>
-          <p class="srv-roles" data-owner-editable>SS Verify y Mod+</p>
+          <p class="srv-roles" data-editable>SS Verify y Mod+</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
-      <article class="srv-card" data-name="FladePvP" data-logo="assets/fladepvp.png">
+      <article class="srv-card" data-name="FladePvP" data-logo="assets/fladepvp.png" data-draggable>
         <div class="sheen"></div><div class="srv-inner">
           <div class="srv-top">
             <div class="srv-logo"><img src="assets/fladepvp.png" alt="FladePvP"></div>
-            <div class="srv-meta"><h3 data-owner-editable>FladePvP</h3><span class="srv-year" data-owner-editable>2024</span></div>
+            <div class="srv-meta"><h3 data-editable>FladePvP</h3><span class="srv-year" data-editable>2024</span></div>
           </div>
-          <p class="srv-roles" data-owner-editable>SS Coordinator y Admin</p>
+          <p class="srv-roles" data-editable>SS Coordinator y Admin</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
-      <article class="srv-card" data-name="InfernalMC" data-logo="assets/infernalmc.png">
+      <article class="srv-card" data-name="InfernalMC" data-logo="assets/infernalmc.png" data-draggable>
         <div class="sheen"></div><div class="srv-inner">
           <div class="srv-top">
             <div class="srv-logo"><img src="assets/infernalmc.png" alt="InfernalMC"></div>
-            <div class="srv-meta"><h3 data-owner-editable>InfernalMC</h3><span class="srv-year" data-owner-editable>2024</span></div>
+            <div class="srv-meta"><h3 data-editable>InfernalMC</h3><span class="srv-year" data-editable>2024</span></div>
           </div>
-          <p class="srv-roles" data-owner-editable>SS Manager y Manager</p>
+          <p class="srv-roles" data-editable>SS Manager y Manager</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
-      <article class="srv-card" data-name="AstralMC" data-logo="assets/astralmc.png">
+      <article class="srv-card" data-name="AstralMC" data-logo="assets/astralmc.png" data-draggable>
         <div class="sheen"></div><div class="srv-inner">
           <div class="srv-top">
             <div class="srv-logo"><img src="assets/astralmc.png" alt="AstralMC"></div>
-            <div class="srv-meta"><h3 data-owner-editable>AstralMC</h3><span class="srv-year" data-owner-editable>2025</span></div>
+            <div class="srv-meta"><h3 data-editable>AstralMC</h3><span class="srv-year" data-editable>2025</span></div>
           </div>
-          <p class="srv-roles" data-owner-editable>SS Trainer y Mod</p>
+          <p class="srv-roles" data-editable>SS Trainer y Mod</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
-      <article class="srv-card" data-name="DynamicPvP" data-logo="assets/dynamicpvp.png">
+      <article class="srv-card" data-name="DynamicPvP" data-logo="assets/dynamicpvp.png" data-draggable>
         <div class="sheen"></div><div class="srv-inner">
           <div class="srv-top">
             <div class="srv-logo"><img src="assets/dynamicpvp.png" alt="DynamicPvP"></div>
-            <div class="srv-meta"><h3 data-owner-editable>DynamicPvP</h3><span class="srv-year" data-owner-editable>Now</span></div>
+            <div class="srv-meta"><h3 data-editable>DynamicPvP</h3><span class="srv-year" data-editable>Now</span></div>
           </div>
-          <p class="srv-roles" data-owner-editable>SS Verify y Mod</p>
+          <p class="srv-roles" data-editable>SS Verify y Mod</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- (Mantengo STATS debajo de servidores? Tú pediste orden específico sin stats, pero no querías eliminar nada, así que la dejo después de servers y antes de logros, o la coloco al final. Para no romper nada la muevo debajo de servers invisible solo si quieres. Aquí la dejo detrás de servers por si la sigues usando) -->
-  <section class="stats card" id="statsSection" data-owner-block style="order:2">
-    <div class="stat-chip" data-owner-editable>All Servers <strong>+6</strong></div>
-    <div class="stat-chip" data-owner-editable>SS Experience <strong>+2 Years</strong></div>
-    <div class="stat-chip" data-owner-editable>SS Manager Experience <strong>1 Year</strong></div>
-    <div class="stat-chip" data-owner-editable>Cases Reviewed <strong>120+</strong></div>
-    <div class="stat-chip" id="viewsChip" data-owner-editable>Views <strong id="viewsValue">—</strong></div>
-  </section>
-
   <!-- 3 LOGROS -->
-  <section class="achievements card" id="achSection" data-owner-block>
-    <h2 class="section-title" data-owner-editable><i class="fa-solid fa-trophy"></i> Logros</h2>
+  <section class="achievements card" id="achSection" data-draggable>
+    <h2 class="section-title" data-editable><i class="fa-solid fa-trophy"></i> Logros</h2>
     <div class="ach-lists">
-      <div class="ach-box">
-        <h3 data-owner-editable>SS Category</h3>
+      <div class="ach-box" data-draggable>
+        <h3 data-editable>SS Category</h3>
         <ul>
-          <li data-owner-editable><i class="fa-solid fa-book"></i> Creación de guías de SS avanzadas.</li>
-          <li data-owner-editable><i class="fa-solid fa-people-group"></i> Organización y liderazgo de equipos SS.</li>
-          <li data-owner-editable><i class="fa-solid fa-magnifying-glass"></i> Detección de cheats complejos y ofuscados.</li>
+          <li data-editable><i class="fa-solid fa-book"></i> Creación de guías de SS avanzadas.</li>
+          <li data-editable><i class="fa-solid fa-people-group"></i> Organización y liderazgo de equipos SS.</li>
+          <li data-editable><i class="fa-solid fa-magnifying-glass"></i> Detección de cheats complejos y ofuscados.</li>
         </ul>
       </div>
-      <div class="ach-box">
-        <h3 data-owner-editable>Real Life Category</h3>
+      <div class="ach-box" data-draggable>
+        <h3 data-editable>Real Life Category</h3>
         <ul>
-          <li data-owner-editable><i class="fa-solid fa-medal"></i> Campeón LigaMX Sub 15 2024.</li>
-          <li data-owner-editable><i class="fa-regular fa-futbol"></i> Ex-Jugador Cruz Azul 2024.</li>
-          <li data-owner-editable><i class="fa-regular fa-futbol"></i> Ex-Jugador Colegio Madrd 2025.</li>
-          <li data-owner-editable><i class="fa-regular fa-futbol"></i> Jugador Barceloneta 2025.</li>
-          <li data-owner-editable><i class="fa-solid fa-trophy"></i> Más de 8 títulos acumulados.</li>
+          <li data-editable><i class="fa-solid fa-medal"></i> Campeón LigaMX Sub 15 2024.</li>
+          <li data-editable><i class="fa-regular fa-futbol"></i> Ex-Jugador Cruz Azul 2024.</li>
+          <li data-editable><i class="fa-regular fa-futbol"></i> Ex-Jugador Colegio Madrd 2025.</li>
+          <li data-editable><i class="fa-regular fa-futbol"></i> Jugador Barceloneta 2025.</li>
+          <li data-editable><i class="fa-solid fa-trophy"></i> Más de 8 títulos acumulados.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 4 CURRENTLY DOING (extraído) -->
-  <section class="card mini-panel" id="panelDoing" data-owner-block>
+  <!-- 4 CURRENTLY DOING -->
+  <section class="card mini-panel" id="panelDoing" data-draggable>
     <div class="panel-head">
-      <h3 data-owner-editable>Currently Doing</h3>
+      <h3 data-editable>Currently Doing</h3>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <button id="startSession" class="btn small" type="button" data-admin><i class="fa-solid fa-play"></i> Start SS</button>
         <button id="endSession" class="btn small danger" type="button" data-admin><i class="fa-solid fa-stop"></i> End SS</button>
@@ -492,8 +412,8 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
   </section>
 
   <!-- 5 MÚSICA -->
-  <section class="music card" id="musicSection" data-owner-block>
-    <h2 class="section-title" data-owner-editable><i class="fa-solid fa-music"></i> Música</h2>
+  <section class="music card" id="musicSection" data-draggable>
+    <h2 class="section-title" data-editable><i class="fa-solid fa-music"></i> Música</h2>
     <div class="music-simple">
       <div id="musicState">Ready: cancion.mp3</div>
       <div class="music-controls-basic">
@@ -514,10 +434,10 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
-  <!-- 6 VIEWS (extraído) -->
-  <section class="card mini-panel" id="panelViews" data-owner-block>
+  <!-- 6 VIEWS -->
+  <section class="card mini-panel" id="panelViews" data-draggable>
     <div class="panel-head">
-      <h3 data-owner-editable>Views</h3>
+      <h3 data-editable>Views</h3>
       <button id="refreshViews" class="btn small" type="button" data-admin title="Actualizar"><i class="fa-solid fa-rotate"></i></button>
     </div>
     <div style="font-size:.62rem;line-height:1.5;display:flex;flex-direction:column;gap:10px">
@@ -534,61 +454,77 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
-  <!-- RESTO DE PANELES (no eliminados) -->
-  <section class="panel-grid" id="extraPanels" data-owner-block>
-    <div class="panels-horizontal" id="panelsRow" style="flex-wrap:wrap;gap:20px">
-      <!-- Los que permanecen (ya no incluyen Doing ni Views) -->
-      <div class="card mini-panel" id="panelObjectives">
-        <div class="panel-head">
-          <h3 data-owner-editable>Próximos Objetivos</h3>
-          <button id="clearObjectives" class="btn small danger" type="button" title="Vaciar" data-admin><i class="fa-solid fa-trash"></i></button>
-        </div>
-        <ul id="objectivesList" class="objectives-list"></ul>
-        <div class="add-row" data-admin>
-          <input id="newObjective" type="text" placeholder="Nuevo objetivo...">
-          <button id="addObjective" class="btn small" type="button"><i class="fa-solid fa-plus"></i></button>
-        </div>
-        <div class="obj-progress" id="objProgress" style="display:none">
-          <div class="bar"><span id="objProgBar"></span></div>
-          <div class="txt" id="objProgText">0%</div>
-        </div>
-      </div>
+  <!-- EXTRAS (incluye Stats y otros paneles) -->
+  <div id="extrasWrapper" data-draggable>
+    <details id="extrasDetails">
+      <summary><i class="fa-solid fa-layer-group"></i> Extras</summary>
+      <div id="extrasInner">
+        <!-- STATS -->
+        <section class="stats card mini-panel" id="statsSection" data-draggable>
+          <div class="stat-chip" data-editable>All Servers <strong>+6</strong></div>
+          <div class="stat-chip" data-editable>SS Experience <strong>+2 Years</strong></div>
+            <div class="stat-chip" data-editable>SS Manager Experience <strong>1 Year</strong></div>
+          <div class="stat-chip" data-editable>Cases Reviewed <strong>120+</strong></div>
+          <div class="stat-chip" id="viewsChip2" data-editable>Views <strong id="viewsValue">—</strong></div>
+        </section>
 
-      <div class="card mini-panel" id="panelChangelog">
-        <div class="panel-head">
-          <h3 data-owner-editable>Changelog / Updates</h3>
-          <button id="clearChangelog" class="btn small danger" type="button" title="Borrar todo" data-admin><i class="fa-solid fa-eraser"></i></button>
+        <!-- Objetivos -->
+        <div class="card mini-panel" id="panelObjectives" data-draggable>
+          <div class="panel-head">
+            <h3 data-editable>Próximos Objetivos</h3>
+            <button id="clearObjectives" class="btn small danger" type="button" title="Vaciar" data-admin><i class="fa-solid fa-trash"></i></button>
+          </div>
+          <ul id="objectivesList" class="objectives-list"></ul>
+          <div class="add-row" data-admin>
+            <input id="newObjective" type="text" placeholder="Nuevo objetivo...">
+            <button id="addObjective" class="btn small" type="button"><i class="fa-solid fa-plus"></i></button>
+          </div>
+          <div class="obj-progress" id="objProgress" style="display:none">
+            <div class="bar"><span id="objProgBar"></span></div>
+            <div class="txt" id="objProgText">0%</div>
+          </div>
         </div>
-        <ul id="changelogList" class="changelog-list"></ul>
-        <div class="add-row" data-admin>
-          <input id="newChange" type="text" placeholder="Nuevo cambio...">
-          <button id="addChange" class="btn small" type="button"><i class="fa-solid fa-plus"></i></button>
+
+        <!-- Changelog -->
+        <div class="card mini-panel" id="panelChangelog" data-draggable>
+          <div class="panel-head">
+            <h3 data-editable>Changelog / Updates</h3>
+            <button id="clearChangelog" class="btn small danger" type="button" title="Borrar todo" data-admin><i class="fa-solid fa-eraser"></i></button>
+          </div>
+          <ul id="changelogList" class="changelog-list"></ul>
+          <div class="add-row" data-admin>
+            <input id="newChange" type="text" placeholder="Nuevo cambio...">
+            <button id="addChange" class="btn small" type="button"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+
+        <!-- Última actualización -->
+        <div class="card mini-panel" id="panelLastUpdate" data-draggable>
+          <div class="panel-head">
+            <h3 data-editable>Última Actualización</h3>
+            <button id="manualUpdate" class="btn small" type="button" title="Forzar" data-admin><i class="fa-solid fa-clock-rotate-left"></i></button>
+          </div>
+          <div class="last-update" id="lastUpdateLabel">—</div>
+          <div class="last-update" id="lastUpdateRelative" style="opacity:.75"></div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="card mini-panel" id="panelGallery" data-draggable>
+          <div class="panel-head"><h3 data-editable>Evidencias</h3></div>
+          <div class="placeholder-box" data-editable>PROXIMAMENTE...</div>
+        </div>
+
+        <!-- Tools -->
+        <div class="card mini-panel" id="panelTools" data-draggable>
+          <div class="panel-head"><h3 data-editable>Herramientas</h3></div>
+          <div class="placeholder-box" data-editable>PROXIMAMENTE...</div>
         </div>
       </div>
-
-      <div class="card mini-panel" id="panelLastUpdate">
-        <div class="panel-head">
-          <h3 data-owner-editable>Última Actualización</h3>
-          <button id="manualUpdate" class="btn small" type="button" title="Forzar" data-admin><i class="fa-solid fa-clock-rotate-left"></i></button>
-        </div>
-        <div class="last-update" id="lastUpdateLabel">—</div>
-        <div class="last-update" id="lastUpdateRelative" style="opacity:.75"></div>
-      </div>
-
-      <div class="card mini-panel" id="panelGallery" style="flex:1 1 300px">
-        <div class="panel-head"><h3 data-owner-editable>Evidencias</h3></div>
-        <div class="placeholder-box" data-owner-editable>PROXIMAMENTE...</div>
-      </div>
-
-      <div class="card mini-panel" id="panelTools" style="flex:1 1 300px">
-        <div class="panel-head"><h3 data-owner-editable>Herramientas</h3></div>
-        <div class="placeholder-box" data-owner-editable>PROXIMAMENTE...</div>
-      </div>
-    </div>
-  </section>
+    </details>
+  </div>
 
   <!-- 7 COPYRIGHT -->
-  <footer class="footer" id="footerSection" data-owner-block data-owner-editable>
+  <footer class="footer" id="footerSection" data-draggable data-editable>
     © <span id="year"></span> BestArcher_. All rights reserved.
   </footer>
 </main>
@@ -662,247 +598,276 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
 <div id="debugPanel"><strong>DEBUG</strong><pre id="debugLog"></pre></div>
 <div id="toast" role="status"></div>
 
+<!-- ADMIN TOOLBAR (sólo aparece en modo admin) -->
+<div class="admin-toolbar" id="adminToolbar" style="display:none">
+  <div class="row">
+    <button id="btnToggleEdit"><i class="fa-solid fa-pen-to-square"></i> Edit Text</button>
+    <button id="btnToggleDrag"><i class="fa-solid fa-up-down-left-right"></i> Drag Mode</button>
+  </div>
+  <div class="row">
+    <button id="btnAccent"><i class="fa-solid fa-palette"></i> Accent</button>
+    <button id="btnFocusCycle"><i class="fa-solid fa-bullseye"></i> Focus Server</button>
+  </div>
+  <div class="row">
+    <button id="btnConfetti"><i class="fa-solid fa-meteor"></i> Confetti</button>
+    <button id="btnRndBG"><i class="fa-solid fa-shuffle"></i> Random BG</button>
+  </div>
+  <div class="row">
+    <button id="btnCompact"><i class="fa-solid fa-compress"></i> Compact</button>
+    <button id="btnExport"><i class="fa-solid fa-file-export"></i> Export</button>
+  </div>
+</div>
+
 <script>
-/* =============== CONFIG PASSWORDS =============== */
-const ADMIN_HASH = "8d1a714fdc290c65b183a88f7d3b474634579ac6b73b8cdaf704490049591484"; // hash admin
-const OWNER_PASSWORD = "BestOwner2025"; // contraseña owner (texto plano)
+/* ================== CONFIG ================== */
+const ADMIN_HASH = "8d1a714fdc290c65b183a88f7d3b474634579ac6b73b8cdaf704490049591484"; // sha256 de tu clave admin
+let isAdmin=false;
+let editMode=false;
+let dragMode=false;
 
-/* =============== FLAGS =============== */
-let isAdmin=false,isOwner=false,globalEdit=false;
-
-/* =============== HELPERS =============== */
-const $=(s,c=document)=>c.querySelector(s);
-const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
-const toast=(m,d=1800)=>{const t=$("#toast");t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),d);};
-const log=(m)=>{ if(!window._debug)return; const l=$("#debugLog"); l.textContent+=m+"\\n"; l.scrollTop=l.scrollHeight; };
-async function sha256Hex(str){
-  const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-function sanitizeText(t){return t.replace(/[<>]/g,'').replace(/\\s+$/,'');}
-function ripple(e,btn){
-  const r=document.createElement('span');r.className='ripple';
-  const rect=btn.getBoundingClientRect();
-  r.style.left=(e.clientX-rect.left)+'px';r.style.top=(e.clientY-rect.top)+'px';
-  btn.appendChild(r);r.addEventListener('animationend',()=>r.remove());
-}
-
-/* =============== ADMIN MODE =============== */
-async function requestAdmin(){
-  const pwd=prompt("Password Admin:"); if(!pwd)return;
-  const h=await sha256Hex(pwd);
-  if(h===ADMIN_HASH){
-    isAdmin=true;document.documentElement.classList.add('admin-mode');toast("Admin ON");
-    refreshObjectivesEditButtons();showViewAdmin();
-  } else toast("Incorrecta");
-}
-function revokeAdmin(){
-  isAdmin=false;document.documentElement.classList.remove('admin-mode');
-  toast("Admin OFF");refreshObjectivesEditButtons();hideViewAdmin();
-}
-
-/* =============== OWNER MODE =============== */
-function requestOwner(){
-  const pwd=prompt("Owner password:"); if(pwd===OWNER_PASSWORD){
-    isOwner=true;document.documentElement.classList.add('owner-mode');toast("Owner ON");
-    enableOwnerEditable(globalEdit);enableDragAll();
-    restoreOrders();restoreOwnerTexts();
-  }else if(pwd) toast("Clave incorrecta");
-}
-function revokeOwner(){
-  isOwner=false;document.documentElement.classList.remove('owner-mode');
-  toast("Owner OFF");disableDragAll();enableOwnerEditable(false);
-}
-function toggleGlobalEdit(){
-  if(!isOwner){toast("Solo owner");return;}
-  globalEdit=!globalEdit;
-  enableOwnerEditable(globalEdit);
-  toast(globalEdit?"Edición Global ON":"Edición Global OFF");
-}
-
-/* =============== OWNER TEXT STORAGE =============== */
-const OWNER_TEXT_KEY='ba_owner_text_map_v2';
-function enableOwnerEditable(on){
-  $$('[data-owner-editable]').forEach(el=>{
-    if(on){
-      el.setAttribute('contenteditable','true');
-      if(!el._ownerListener){
-        el._ownerListener=true;
-        el.addEventListener('blur',ownerSaveText);
-      }
-    }else{
-      el.removeAttribute('contenteditable');
-    }
-  });
-}
-function ownerSaveText(e){
-  const map=JSON.parse(localStorage.getItem(OWNER_TEXT_KEY)||'{}');
-  const uid=getOwnerUID(e.target);
-  map[uid]=sanitizeText(e.target.innerText.trim());
-  localStorage.setItem(OWNER_TEXT_KEY,JSON.stringify(map));
-}
-function getOwnerUID(el){
-  if(!el.dataset.oid) el.dataset.oid='oid_'+Math.random().toString(36).slice(2,10);
-  return el.dataset.oid;
-}
-function restoreOwnerTexts(){
-  const map=JSON.parse(localStorage.getItem(OWNER_TEXT_KEY)||'{}');
-  Object.entries(map).forEach(([oid,txt])=>{
-    const el=$('[data-owner-editable][data-oid="'+oid+'"]');
-    if(el) el.innerText=txt;
-  });
-}
-
-/* =============== DRAG & DROP (Owner) =============== */
-const ORDER_SERVERS_KEY='ba_order_servers';
-const ORDER_PANELS_KEY='ba_order_panels';
-const ORDER_STATS_KEY='ba_order_stats';
-const ORDER_SECTIONS_KEY='ba_order_sections';
-let dragSrcEl=null;
-
-function enableDragAll(){
-  $$('#serversGrid .srv-card').forEach(card=>prepDraggable(card,'server'));
-  $$('#extraPanels .mini-panel, #panelDoing, #panelViews').forEach(p=>prepDraggable(p,'panel'));
-  $$('#statsSection .stat-chip').forEach(ch=>prepDraggable(ch,'stat'));
-  // top-level sections
-  $('#appRoot').childNodes.forEach(node=>{
-    if(node.nodeType===1 && node.matches('[data-owner-block], .card')){
-      node.setAttribute('data-owner-block','');
-      prepDraggable(node,'section');
-    }
-  });
-}
-function disableDragAll(){
-  document.querySelectorAll('.dragging').forEach(e=>e.classList.remove('dragging'));
-  const all=[...document.querySelectorAll('[draggable]')];
-  all.forEach(el=>{
-    el.removeAttribute('draggable');
-    el.removeEventListener('dragstart',dragStart);
-    el.removeEventListener('dragover',dragOver);
-    el.removeEventListener('drop',dropItem);
-    el.removeEventListener('dragend',dragEnd);
-  });
-}
-function prepDraggable(el,type){
-  el.draggable=true;
-  el.dataset.dragType=type;
-  el.addEventListener('dragstart',dragStart);
-  el.addEventListener('dragover',dragOver);
-  el.addEventListener('drop',dropItem);
-  el.addEventListener('dragend',dragEnd);
-}
-function dragStart(e){
-  dragSrcEl=this;
-  this.classList.add('dragging');
-  e.dataTransfer.effectAllowed='move';
-  e.dataTransfer.setData('text/plain',this.dataset.dragType||'');
-}
-function dragOver(e){
-  if(!dragSrcEl)return;
-  if(this===dragSrcEl)return;
-  if(this.dataset.dragType!==dragSrcEl.dataset.dragType)return;
-  e.preventDefault();
-  const parent=this.parentElement;
-  const nodes=[...parent.children];
-  const dragIndex=nodes.indexOf(dragSrcEl);
-  const targetIndex=nodes.indexOf(this);
-  if(dragIndex<targetIndex) parent.insertBefore(dragSrcEl,this.nextSibling);
-  else parent.insertBefore(dragSrcEl,this);
-}
-function dropItem(e){e.stopPropagation();}
-function dragEnd(){
-  this.classList.remove('dragging');
-  saveOrders();
-}
-function saveOrders(){
-  const srvOrder=$$('#serversGrid .srv-card').map(c=>c.dataset.name||c.querySelector('h3')?.textContent?.trim());
-  localStorage.setItem(ORDER_SERVERS_KEY,JSON.stringify(srvOrder));
-  const pnlOrder=[...document.querySelectorAll('#panelDoing,#panelViews,#extraPanels .mini-panel')].map(p=>p.id);
-  localStorage.setItem(ORDER_PANELS_KEY,JSON.stringify(pnlOrder));
-  $$('#statsSection .stat-chip').forEach(ch=>{if(!ch.dataset.oid) ch.dataset.oid='stat_'+Math.random().toString(36).slice(2,8);});
-  const statsOrder=$$('#statsSection .stat-chip').map(ch=>ch.dataset.oid);
-  localStorage.setItem(ORDER_STATS_KEY,JSON.stringify(statsOrder));
-  const secOrder=[...$('#appRoot').children].map(sec=>sec.id||sec.className||'node');
-  localStorage.setItem(ORDER_SECTIONS_KEY,JSON.stringify(secOrder));
-}
-function restoreOrders(){
-  // servers
-  const srvOrder=JSON.parse(localStorage.getItem(ORDER_SERVERS_KEY)||'[]');
-  if(srvOrder.length){
-    const grid=$("#serversGrid");
-    srvOrder.forEach(name=>{
-      const card=[...grid.children].find(c=>(c.dataset.name||c.querySelector('h3')?.textContent.trim())===name);
-      if(card) grid.appendChild(card);
-    });
-  }
-  // panels
-  const pnlOrder=JSON.parse(localStorage.getItem(ORDER_PANELS_KEY)||'[]');
-  if(pnlOrder.length){
-    pnlOrder.forEach(id=>{
-      const el=document.getElementById(id);
-      if(!el) return;
-      if(id==='panelDoing'){
-        // keep order where it is (already placed)
-        $('#panelDoing') && $('#panelDoing').parentElement.appendChild(el);
-      }else if(id==='panelViews'){
-        $('#panelViews') && $('#panelViews').parentElement.appendChild(el);
-      }else{
-        const container=$("#extraPanels .panels-horizontal")||$("#extraPanels");
-        container && container.appendChild(el);
-      }
-    });
-  }
-  // stats
-  const statsOrder=JSON.parse(localStorage.getItem(ORDER_STATS_KEY)||'[]');
-  if(statsOrder.length){
-    const statSection=$("#statsSection");
-    statsOrder.forEach(oid=>{
-      const chip=[...statSection.querySelectorAll('.stat-chip')].find(ch=>ch.dataset.oid===oid);
-      if(chip) statSection.appendChild(chip);
-    });
-  }
-  // sections
-  const secOrder=JSON.parse(localStorage.getItem(ORDER_SECTIONS_KEY)||'[]');
-  if(secOrder.length){
-    const root=$("#appRoot");
-    secOrder.forEach(id=>{
-      const el=$('#'+CSS.escape(id));
-      if(el && el.parentElement===root) root.appendChild(el);
-    });
-  }
-}
-
-/* EMOJI SPACING */
-function fixEmojiSpacingText(str){
-  return str.replace(/([\p{Extended_Pictographic}])(?=[^\s\p{Extended_Pictographic}])/gu,'$1 ').replace(/ {2,}/g,' ');
-}
-function fixEmojiSpacing(root=document.body){
-  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
-  const nodes=[];while(walker.nextNode()) nodes.push(walker.currentNode);
-  nodes.forEach(n=>{
-    if(n.parentElement && ['INPUT','TEXTAREA'].includes(n.parentElement.tagName)) return;
-    const t=n.textContent;const f=fixEmojiSpacingText(t);if(f!==t) n.textContent=f;
-  });
-}
-
-/* SETTINGS */
-const STORAGE_KEY='ba_final_custom_settings_v10';
+const STORAGE_KEY='ba_final_custom_settings_v11';
 const defaults={bgMode:'car',bgImageUrl:'',tilt:true,cursor:'minimal',musicAutoplay:true,musicInitVol:0.65,dynamicBG:false,cleanMode:false,streamMode:false,logoCover:true};
 let settings;try{settings={...defaults,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}}catch{settings={...defaults}}
 const saveSettings=()=>localStorage.setItem(STORAGE_KEY,JSON.stringify(settings));
 
-/* DATA KEYS */
-const K_DOING='ba_doing_text',K_OBJECTIVES='ba_objectives_list',K_CHANGELOG='ba_changelog_list',K_LASTUPDATE='ba_last_update',K_SS_SESSION_START='ba_ss_session_start';
+/* ================== HELPERS ================== */
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const toast=(m,d=1800)=>{const t=$("#toast");t.textContent=m;t.classList.add('show');clearTimeout(t._t);
+t._t=setTimeout(()=>t.classList.remove('show'),d);};
+const log=(m)=>{if(!window._debug)return;const l=$("#debugLog");l.textContent+=m+"\\n";l.scrollTop=l.scrollHeight;};
+async function sha256Hex(str){
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function fixEmojiSpacingText(str){return str.replace(/([\p{Extended_Pictographic}])(?=[^\s\p{Extended_Pictographic}])/gu,'$1 ').replace(/ {2,}/g,' ');}
+function fixEmojiSpacing(root=document.body){
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);const arr=[];
+  while(w.nextNode())arr.push(w.currentNode);
+  arr.forEach(n=>{
+    if(n.parentElement && ['INPUT','TEXTAREA'].includes(n.parentElement.tagName))return;
+    const t=n.textContent;const f=fixEmojiSpacingText(t);if(t!==f)n.textContent=f;
+  });
+}
 
-/* VIEWS */
+/* ================== ADMIN ================== */
+async function requestAdmin(){
+  const pwd=prompt("Admin password:");if(!pwd)return;
+  const h=await sha256Hex(pwd);
+  if(h===ADMIN_HASH){
+    isAdmin=true;
+    document.documentElement.classList.add('admin-mode');
+    $("#adminToolbar").style.display='flex';
+    toast("Admin ON");
+    restoreTextEdits();
+    updateAdminStates();
+  }else toast("Incorrecta");
+}
+function revokeAdmin(){
+  isAdmin=false;
+  document.documentElement.classList.remove('admin-mode');
+  $("#adminToolbar").style.display='none';
+  disableEditMode();
+  disableDragMode();
+  toast("Admin OFF");
+}
+
+/* ================== TEXT EDITING ================== */
+const TEXT_KEY='ba_admin_text_map_v1';
+function enableEditMode(){
+  editMode=true;
+  document.body.classList.add('editable-active');
+  $$('[data-editable]').forEach(el=>{
+    el.setAttribute('contenteditable','true');
+    if(!el._saved){
+      el.addEventListener('blur',saveEditableText);
+      el._saved=true;
+    }
+  });
+  $('#btnToggleEdit').classList.add('active');
+}
+function disableEditMode(){
+  editMode=false;
+  document.body.classList.remove('editable-active');
+  $$('[data-editable]').forEach(el=>el.removeAttribute('contenteditable'));
+  $('#btnToggleEdit').classList.remove('active');
+}
+function toggleEdit(){ editMode?disableEditMode():enableEditMode(); }
+function saveEditableText(e){
+  const map=JSON.parse(localStorage.getItem(TEXT_KEY)||'{}');
+  const el=e.target;
+  if(!el.dataset.eid) el.dataset.eid='e_'+Math.random().toString(36).slice(2,9);
+  map[el.dataset.eid]=el.innerText.trim();
+  localStorage.setItem(TEXT_KEY,JSON.stringify(map));
+}
+function restoreTextEdits(){
+  const map=JSON.parse(localStorage.getItem(TEXT_KEY)||'{}');
+  Object.entries(map).forEach(([id,val])=>{
+    const el=$('[data-editable][data-eid="'+id+'"]');
+    if(el) el.innerText=val;
+  });
+}
+
+/* ================== DRAG & DROP ================== */
+let dragSrc=null;
+function enableDragMode(){
+  dragMode=true;
+  document.body.classList.add('drag-active');
+  $$('[data-draggable], .stat-chip, .srv-card, .mini-panel.card, .ach-box').forEach(el=>{
+    if(!el.dataset.dragReady){
+      el.dataset.dragReady='1';
+      el.setAttribute('draggable','true');
+      el.addEventListener('dragstart',dragStart);
+      el.addEventListener('dragover',dragOver);
+      el.addEventListener('drop',dragDrop);
+      el.addEventListener('dragend',dragEnd);
+    }
+  });
+  $('#btnToggleDrag').classList.add('active');
+}
+function disableDragMode(){
+  dragMode=false;
+  document.body.classList.remove('drag-active');
+  $$('[draggable]').forEach(el=>{
+    el.removeAttribute('draggable');
+    el.removeEventListener('dragstart',dragStart);
+    el.removeEventListener('dragover',dragOver);
+    el.removeEventListener('drop',dragDrop);
+    el.removeEventListener('dragend',dragEnd);
+  });
+  $('#btnToggleDrag').classList.remove('active');
+}
+function toggleDrag(){dragMode?disableDragMode():enableDragMode();}
+function dragStart(e){dragSrc=this;this.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
+function dragOver(e){
+  if(!dragSrc||this===dragSrc)return;
+  if(this.parentElement!==dragSrc.parentElement)return;
+  e.preventDefault();
+  const parent=this.parentElement;
+  const children=[...parent.children];
+  const a=children.indexOf(dragSrc);
+  const b=children.indexOf(this);
+  if(a<b) parent.insertBefore(dragSrc,this.nextSibling);
+  else parent.insertBefore(dragSrc,this);
+}
+function dragDrop(e){e.stopPropagation();}
+function dragEnd(){this.classList.remove('dragging');saveLayoutOrder();}
+
+const LAYOUT_KEY='ba_layout_order_v2';
+function saveLayoutOrder(){
+  const order=[...$('#appRoot').children].map(n=>n.id||'');
+  localStorage.setItem(LAYOUT_KEY,JSON.stringify(order));
+}
+function restoreLayoutOrder(){
+  const order=JSON.parse(localStorage.getItem(LAYOUT_KEY)||'[]');
+  if(!order.length)return;
+  const root=$("#appRoot");
+  order.forEach(id=>{
+    if(!id)return;
+    const el=$('#'+CSS.escape(id));
+    if(el && el.parentElement===root) root.appendChild(el);
+  });
+}
+
+/* ================== ACCENT / VISUALES ================== */
+const accents=['#78c8ff','#ff7fd1','#8fff9c','#ffd66b','#ff8f60','#b28bff','#5ee0ff','#ff5e5e'];
+let accentIndex=0;
+function cycleAccent(){
+  accentIndex=(accentIndex+1)%accents.length;
+  document.documentElement.style.setProperty('--accent',accents[accentIndex]);
+  toast('Accent: '+accents[accentIndex]);
+}
+let focusIndex=0;
+function cycleFocusServer(){
+  const cards=$$('#serversGrid .srv-card');
+  if(!cards.length)return;
+  cards.forEach(c=>c.classList.remove('now-focus'));
+  focusIndex=(focusIndex+1)%cards.length;
+  cards[focusIndex].classList.add('now-focus');
+  toast('Focus: '+(cards[focusIndex].dataset.name||focusIndex+1));
+}
+
+/* ================== CONFETTI ================== */
+function launchConfetti(){
+  const canvas=$("#confettiCanvas");
+  const ctx=canvas.getContext('2d');
+  canvas.width=innerWidth;canvas.height=innerHeight;
+  const pieces=Array.from({length:180},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height - canvas.height,
+    r:4+Math.random()*6,
+    c:`hsl(${Math.random()*360},85%,60%)`,
+    vy:2+Math.random()*4,
+    vx:Math.random()*2-1,
+    rot:Math.random()*360,
+    vr:Math.random()*6-3
+  }));
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;
+      if(p.y>canvas.height+20) p.y=-20;
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.c;
+      ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);
+      ctx.restore();
+    });
+    frame++;
+    if(frame<400) requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
+
+/* ================== RANDOM BACKGROUND ================== */
+function randomBackground(){
+  const opts=['car','aurora','particles'];
+  settings.bgMode=opts[Math.floor(Math.random()*opts.length)];
+  saveSettings();
+  applyBackground(true);
+  toast('BG: '+settings.bgMode);
+}
+
+/* ================== COMPACT ================== */
+function toggleCompact(){
+  document.body.classList.toggle('compact');
+  $('#btnCompact').classList.toggle('active');
+}
+
+/* ================== EXPORT ================== */
+function exportData(){
+  const data={
+    text:JSON.parse(localStorage.getItem(TEXT_KEY)||'{}'),
+    layout:JSON.parse(localStorage.getItem(LAYOUT_KEY)||'[]'),
+    objectives:JSON.parse(localStorage.getItem('ba_objectives_list')||'[]'),
+    changelog:JSON.parse(localStorage.getItem('ba_changelog_list')||'[]'),
+    lastUpdate:localStorage.getItem('ba_last_update')||'',
+    viewsReal:localStorage.getItem('ba_views_real')||0,
+    viewsAdj:localStorage.getItem('ba_views_adj')||0,
+    settings,
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='portfolio_export.json';
+  a.click();
+  toast('Export listo');
+}
+
+/* ================== VIEWS ================== */
 const K_VIEWS_REAL='ba_views_real',K_VIEWS_ADJ='ba_views_adj',K_VIEWS_LAST_HIT='ba_views_last_hit';
 const VIEW_NAMESPACE='bestarcher_portfolio',VIEW_KEY='global_views_v2',VIEW_API='https://api.countapi.xyz';
 const VISIT_COOLDOWN_MS=6*60*60*1000;
 let viewsReal=Number(localStorage.getItem(K_VIEWS_REAL)||0);
 let viewsAdj=Number(localStorage.getItem(K_VIEWS_ADJ)||0);
-function showViewAdmin(){ $("#viewsAdminControls")?.setAttribute('style','display:flex;gap:6px;flex-wrap:wrap'); }
-function hideViewAdmin(){ $("#viewsAdminControls")?.setAttribute('style','display:none'); }
-function updateViewsUI(){const total=viewsReal+viewsAdj;$("#viewsDisplayed").textContent=total;$("#viewsValue").textContent=total;}
+function updateViewsUI(){
+  const total=viewsReal+viewsAdj;
+  $('#viewsDisplayed').textContent=total;
+  $('#viewsValue')?.textContent=total;
+}
 async function fetchView(hit){
   const url=hit?`${VIEW_API}/hit/${VIEW_NAMESPACE}/${VIEW_KEY}`:`${VIEW_API}/get/${VIEW_NAMESPACE}/${VIEW_KEY}`;
   try{const r=await fetch(url);if(!r.ok)throw 0;const d=await r.json();return d.value;}catch{return null;}
@@ -914,76 +879,21 @@ async function initViews(){
   if(val!==null){viewsReal=val;localStorage.setItem(K_VIEWS_REAL,String(val));if(doHit)localStorage.setItem(K_VIEWS_LAST_HIT,String(now));}
   updateViewsUI();
 }
-$("#refreshViews")?.addEventListener('click',async()=>{
+$('#refreshViews')?.addEventListener('click',async()=>{
   if(!isAdmin){toast('Solo admin');return;}
   const val=await fetchView(false);
   if(val!==null){viewsReal=val;localStorage.setItem(K_VIEWS_REAL,String(val));updateViewsUI();toast('Actualizado');}
-  else toast('Error');
 });
-$("#viewSetBtn")?.addEventListener('click',()=>{
-  if(!isAdmin){toast('Solo admin');return;}
-  const t=Number($("#viewSetInput").value||0);if(isNaN(t))return;
-  viewsAdj=t-viewsReal;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();toast('Set');
+$('#viewSetBtn')?.addEventListener('click',()=>{
+  if(!isAdmin)return;
+  const t=Number($('#viewSetInput').value||0);if(isNaN(t))return;
+  viewsAdj=t-viewsReal;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();
 });
-$("#viewPlus1")?.addEventListener('click',()=>{if(!isAdmin)return;viewsAdj++;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();});
-$("#viewPlus100")?.addEventListener('click',()=>{if(!isAdmin)return;viewsAdj+=100;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();});
-$("#viewReset")?.addEventListener('click',()=>{if(!isAdmin)return;if(!confirm('¿Reset a 0?'))return;viewsAdj=-viewsReal;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();toast('Reset');});
+$('#viewPlus1')?.addEventListener('click',()=>{if(!isAdmin)return;viewsAdj++;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();});
+$('#viewPlus100')?.addEventListener('click',()=>{if(!isAdmin)return;viewsAdj+=100;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();});
+$('#viewReset')?.addEventListener('click',()=>{if(!isAdmin)return;if(!confirm('¿Reset a 0?'))return;viewsAdj=-viewsReal;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();});
 
-/* BACKGROUND / CURSOR / TILT */
-const bgParticles=$("#bgParticles"), bgAurora=$("#bgAurora"), bgCar=$("#bgCar"), bgImg=$("#bgImage");
-let pCtx,pArr=[],pRAF,backgroundApplied=false;
-function hideAllBg(){[bgParticles,bgAurora,bgCar,bgImg].forEach(e=>e.style.display='none');cancelAnimationFrame(pRAF);}
-function startParticles(){
-  bgParticles.style.display='block';pCtx=bgParticles.getContext('2d');
-  function resize(){bgParticles.width=innerWidth;bgParticles.height=innerHeight;const count=Math.floor((innerWidth*innerHeight)/26000);
-    pArr=Array.from({length:count},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*0.28,vy:(Math.random()-.5)*0.28}));}
-  resize();addEventListener('resize',resize);
-  (function frame(){pCtx.clearRect(0,0,innerWidth,innerHeight);
-    pArr.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x+=innerWidth;else if(p.x>innerWidth)p.x-=innerWidth;if(p.y<0)p.y+=innerHeight;else if(p.y>innerHeight)p.y-=innerHeight;
-      pCtx.fillStyle='rgba(215,225,255,.38)';pCtx.fillRect(p.x,p.y,2.2,2.2);});
-    pRAF=requestAnimationFrame(frame);})();
-}
-function hourBackground(){const h=new Date().getHours();if(h>=6&&h<12)return'particles';if(h>=12&&h<18)return'aurora';if(h>=18&&h<=23)return'car';return'car';}
-function applyBackground(force=false){
-  if(!force && backgroundApplied && !settings.dynamicBG)return;
-  hideAllBg();let mode=settings.bgMode;if(settings.dynamicBG)mode=hourBackground();
-  if(mode==='car') bgCar.style.display='block';
-  else if(mode==='particles') startParticles();
-  else if(mode==='aurora') bgAurora.style.display='block';
-  else if(mode==='image'){bgImg.style.display='block';bgImg.style.backgroundImage=settings.bgImageUrl?`url("${settings.bgImageUrl}")`:'none';}
-  backgroundApplied=true;
-}
-const cursorDot=document.createElement('div'), cursorRing=document.createElement('div');
-cursorDot.className='cursor-dot';cursorRing.className='cursor-ring';
-function injectCursor(){document.body.appendChild(cursorDot);document.body.appendChild(cursorRing);}
-function applyCursor(style){
-  if(style==='off'||!matchMedia('(pointer:fine)').matches){cursorDot.style.display='none';cursorRing.style.display='none';return;}
-  cursorDot.style.cssText='position:fixed;top:0;left:0;width:6px;height:6px;background:#fff;border-radius:50%;pointer-events:none;z-index:1000;display:block;transform:translate(-50%,-50%)';
-  cursorRing.style.cssText='position:fixed;top:0;left:0;width:38px;height:38px;border:2px solid rgba(255,255,255,.35);border-radius:50%;pointer-events:none;z-index:1000;display:block;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s';
-  cursorRing.classList.toggle('glow',style==='glow');
-  if(!cursorDot.dataset.started){
-    cursorDot.dataset.started='1';let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-    (function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;cursorDot.style.transform=`translate(${mx}px,${my}px)`;cursorRing.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(loop);})();
-    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
-    addEventListener('mousedown',()=>{cursorRing.style.width='56px';cursorRing.style.height='56px';});
-    addEventListener('mouseup',()=>{cursorRing.style.width='38px';cursorRing.style.height='38px';});
-  }
-}
-function applyTilt(on){
-  $$('.srv-card').forEach(el=>{
-    el.onmousemove=null;el.onmouseleave=null;el.style.transform='';
-    if(!on||!matchMedia('(pointer:fine)').matches||document.body.classList.contains('streaming-mode'))return;
-    let af=null,tx=0,ty=0,cx=0,cy=0;
-    function anim(){af=null;cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(900px) rotateX(${cx}deg) rotateY(${cy}deg)`;if(Math.abs(cx-tx)>0.05||Math.abs(cy-ty)>0.05)af=requestAnimationFrame(anim);}
-    el.addEventListener('mousemove',e=>{
-      const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-      tx=(0.5-y)*9;ty=(x-0.5)*9;if(!af)af=requestAnimationFrame(anim);
-    });
-    el.addEventListener('mouseleave',()=>{tx=ty=0;if(!af)af=requestAnimationFrame(anim);});
-  });
-}
-
-/* SERVER MODAL */
+/* ================== SERVER MODAL ================== */
 const serverDetails={
   DynoPvP:{desc:"Moderación y SS enfocada en jugadores competitivos.",tags:["SS","Mod","Verify"]},
   FladePvP:{desc:"Coordinación y administración de procesos SS internos.",tags:["Admin","Coord"]},
@@ -998,7 +908,7 @@ function openServer(card){
   const roles=card.querySelector('.srv-roles')?.textContent.trim()||'—';
   const info=serverDetails[name]||{desc:"Sin datos.",tags:["—"]};
   mTitle.textContent=name;mMeta.textContent=`${year} · ${roles}`;
-  mLogo.textContent=(name||'SV').slice(0,2);
+  mLogo.textContent=(name||'SV').slice(0,2).toUpperCase();
   mLogo.style.backgroundImage=card.dataset.logo?`url("${card.dataset.logo}")`:'none';
   mLogo.style.backgroundSize='cover';mLogo.style.backgroundPosition='center';
   mDesc.textContent=info.desc;
@@ -1014,7 +924,7 @@ $$('.srv-card').forEach(c=>{
   c.addEventListener('click',e=>{if(e.target.closest('.srv-btn'))return;openServer(c);});
 });
 
-/* MUSIC */
+/* ================== MUSIC ================== */
 const audioEl=$("#bgAudio");
 const playBtn=$("#playMusic"), volDown=$("#volDown"), volUp=$("#volUp"), muteBtn=$("#muteMusic"),
       volSlider=$("#volumeSlider"), musicState=$("#musicState"), reloadBtn=$("#reloadAudio");
@@ -1022,49 +932,62 @@ function updateMusicState(){
   const src=(audioEl.currentSrc.split('/').pop()||'cancion.mp3');
   musicState.textContent=(audioEl.paused?'Pausado: ':'Reproduciendo: ')+src+(audioEl.muted?' (Muted)':'');
 }
-audioEl.addEventListener('error',()=>toast('Error audio'));
 playBtn.addEventListener('click',()=>{
   if(audioEl.paused){
-    audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();})
-      .catch(()=>toast('Reproducción bloqueada'));
-  }else{audioEl.pause();playBtn.innerHTML='<i class="fa-solid fa-play"></i> Play';updateMusicState();}
+    audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();}).catch(()=>toast('Autoplay bloqueado'));
+  }else{
+    audioEl.pause();playBtn.innerHTML='<i class="fa-solid fa-play"></i> Play';updateMusicState();
+  }
 });
 reloadBtn.addEventListener('click',()=>{audioEl.pause();audioEl.currentTime=0;audioEl.load();toast('Audio recargado');updateMusicState();});
 volDown.addEventListener('click',()=>{audioEl.volume=Math.max(0,audioEl.volume-0.1);volSlider.value=Math.round(audioEl.volume*100);updateMusicState();});
 volUp.addEventListener('click',()=>{audioEl.volume=Math.min(1,audioEl.volume+0.1);volSlider.value=Math.round(audioEl.volume*100);updateMusicState();});
 muteBtn.addEventListener('click',()=>{audioEl.muted=!audioEl.muted;muteBtn.innerHTML=audioEl.muted?'<i class="fa-solid fa-volume-xmark"></i> Mute':'<i class="fa-solid fa-volume-high"></i> Mute';updateMusicState();});
-volSlider.addEventListener('input',()=>{audioEl.volume=(volSlider.value|0)/100;audioEl.muted=audioEl.volume===0;muteBtn.innerHTML=audioEl.muted?'<i class="fa-solid fa-volume-xmark"></i> Mute':'<i class="fa-solid fa-volume-high"></i> Mute';updateMusicState();});
+volSlider.addEventListener('input',()=>{audioEl.volume=(volSlider.value|0)/100;audioEl.muted=audioEl.volume===0;updateMusicState();});
 
-/* CURRENTLY DOING */
+/* ================== CURRENTLY DOING ================== */
 const doingEl=$("#doingContent"), editDoing=$("#editDoing");
+const K_DOING='ba_doing_text';
 function loadDoing(){doingEl.textContent=fixEmojiSpacingText(localStorage.getItem(K_DOING)||'Disponible');}
 function saveDoing(){
-  let txt=fixEmojiSpacingText(doingEl.textContent.trim()||'Disponible');doingEl.textContent=txt;
-  localStorage.setItem(K_DOING,txt);doingEl.dataset.base=txt;updateLastUpdate();
+  let txt=fixEmojiSpacingText(doingEl.textContent.trim()||'Disponible');
+  doingEl.textContent=txt;localStorage.setItem(K_DOING,txt);doingEl.dataset.base=txt;updateLastUpdate();
 }
 editDoing.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
   const editing=doingEl.getAttribute('contenteditable')==='true';
-  if(!editing){doingEl.setAttribute('contenteditable','true');doingEl.focus();editDoing.innerHTML='<i class="fa-solid fa-floppy-disk"></i> Save';}
-  else{doingEl.setAttribute('contenteditable','false');saveDoing();editDoing.innerHTML='<i class="fa-solid fa-pen"></i> Edit';}
+  if(!editing){
+    doingEl.setAttribute('contenteditable','true');
+    doingEl.focus();
+    editDoing.innerHTML='<i class="fa-solid fa-floppy-disk"></i> Save';
+  }else{
+    doingEl.setAttribute('contenteditable','false');
+    saveDoing();
+    editDoing.innerHTML='<i class="fa-solid fa-pen"></i> Edit';
+  }
 });
 
-/* SS SESSION TIMER */
+/* ================== SS SESSION TIMER ================== */
 const startSessionBtn=$("#startSession"), endSessionBtn=$("#endSession");
-let sessionStart=null;
+const K_SS_SESSION_START='ba_ss_session_start';let sessionStart=null;
 function loadSession(){const s=localStorage.getItem(K_SS_SESSION_START);if(s)sessionStart=+s;}
 function startSession(){
   if(!isAdmin){toast('Solo admin');return;}
   if(sessionStart){toast('Ya activa');return;}
   sessionStart=Date.now();localStorage.setItem(K_SS_SESSION_START,String(sessionStart));
-  doingEl.dataset.base=doingEl.textContent;toast('SS Session iniciada');
+  doingEl.dataset.base=doingEl.textContent;toast('Sesión SS iniciada');
 }
 function endSession(){
   if(!isAdmin){toast('Solo admin');return;}
   if(!sessionStart){toast('No hay sesión');return;}
   const mins=Math.floor((Date.now()-sessionStart)/60000);
   addChangelogEntry(`Sesión SS finalizada (${mins} min)`);
-  localStorage.removeItem(K_SS_SESSION_START);sessionStart=null;delete doingEl.dataset.base;saveDoing();toast('SS Session terminada');updateLastUpdate();
+  localStorage.removeItem(K_SS_SESSION_START);
+  sessionStart=null;
+  delete doingEl.dataset.base;
+  saveDoing();
+  toast('Sesión terminada');
+  updateLastUpdate();
 }
 startSessionBtn.addEventListener('click',startSession);
 endSessionBtn.addEventListener('click',endSession);
@@ -1076,20 +999,27 @@ function renderSessionTicker(){
   requestAnimationFrame(renderSessionTicker);
 }
 
-/* OBJECTIVES */
+/* ================== OBJECTIVES ================== */
 const objList=$("#objectivesList"), objInput=$("#newObjective"), objAdd=$("#addObjective"), objClear=$("#clearObjectives");
 const objProgressWrap=$("#objProgress"), objProgBar=$("#objProgBar"), objProgText=$("#objProgText");
+const K_OBJECTIVES='ba_objectives_list';
 function loadObjectives(){
-  objList.innerHTML='';const arr=JSON.parse(localStorage.getItem(K_OBJECTIVES)||'[]');
-  arr.forEach(o=>renderObjective(o));updateObjectivesProgress();fixEmojiSpacing(objList);
+  objList.innerHTML='';
+  const arr=JSON.parse(localStorage.getItem(K_OBJECTIVES)||'[]');
+  arr.forEach(o=>renderObjective(o));
+  updateObjectivesProgress();
+  fixEmojiSpacing(objList);
 }
 function saveObjectives(){
   const data=[...objList.children].map(li=>({text:li.dataset.text,done:li.classList.contains('done')}));
-  localStorage.setItem(K_OBJECTIVES,JSON.stringify(data));updateObjectivesProgress();
+  localStorage.setItem(K_OBJECTIVES,JSON.stringify(data));
+  updateObjectivesProgress();
 }
 function renderObjective(o){
-  const li=document.createElement('li');const txt=fixEmojiSpacingText(o.text);li.dataset.text=txt;
-  if(o.done) li.classList.add('done');
+  const li=document.createElement('li');
+  const txt=fixEmojiSpacingText(o.text);
+  li.dataset.text=txt;
+  if(o.done)li.classList.add('done');
   li.innerHTML=`<span>${txt}</span>${isAdmin?'<button class="btn small icon danger" type="button" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>':''}`;
   li.addEventListener('click',e=>{
     if(!isAdmin)return;
@@ -1099,7 +1029,6 @@ function renderObjective(o){
   if(isAdmin) li.querySelector('button')?.addEventListener('click',()=>{li.remove();saveObjectives();updateLastUpdate();});
   objList.appendChild(li);
 }
-function refreshObjectivesEditButtons(){loadObjectives();}
 objAdd?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
   let v=objInput.value.trim();if(!v)return;
@@ -1115,20 +1044,28 @@ function updateObjectivesProgress(){
   const arr=JSON.parse(localStorage.getItem(K_OBJECTIVES)||'[]');
   if(!arr.length){objProgressWrap.style.display='none';return;}
   objProgressWrap.style.display='flex';
-  const done=arr.filter(o=>o.done).length,pct=Math.round(done/arr.length*100);
-  objProgBar.style.width=pct+'%';objProgText.textContent=pct+'% ('+done+'/'+arr.length+')';
+  const done=arr.filter(o=>o.done).length;
+  const pct=Math.round(done/arr.length*100);
+  objProgBar.style.width=pct+'%';
+  objProgText.textContent=pct+'% ('+done+'/'+arr.length+')';
 }
+function refreshObjectivesEditButtons(){loadObjectives();}
 
-/* CHANGELOG */
+/* ================== CHANGELOG ================== */
 const clList=$("#changelogList"), clInput=$("#newChange"), clAdd=$("#addChange"), clClear=$("#clearChangelog");
+const K_CHANGELOG='ba_changelog_list';
 function loadChangelog(){
-  clList.innerHTML='';const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]').sort((a,b)=>b.time-a.time);
-  arr.forEach(it=>renderChange(it));fixEmojiSpacing(clList);
+  clList.innerHTML='';
+  const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]').sort((a,b)=>b.time-a.time);
+  arr.forEach(it=>renderChange(it));
+  fixEmojiSpacing(clList);
 }
 function saveChangelog(arr){localStorage.setItem(K_CHANGELOG,JSON.stringify(arr));}
 function addChangelogEntry(text){
-  text=fixEmojiSpacingText(text);const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]');
-  arr.push({text,time:Date.now()});saveChangelog(arr);loadChangelog();
+  text=fixEmojiSpacingText(text);
+  const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]');
+  arr.push({text,time:Date.now()});
+  saveChangelog(arr);loadChangelog();
 }
 function renderChange(it){
   const li=document.createElement('li');
@@ -1137,7 +1074,7 @@ function renderChange(it){
 }
 clAdd?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  let v=clInput.value.trim();if(!v)return;
+  const v=clInput.value.trim();if(!v)return;
   addChangelogEntry(v);clInput.value='';updateLastUpdate();
 });
 clInput?.addEventListener('keydown',e=>{if(e.key==='Enter')clAdd.click();});
@@ -1147,50 +1084,155 @@ clClear?.addEventListener('click',()=>{
   localStorage.removeItem(K_CHANGELOG);loadChangelog();
 });
 
-/* LAST UPDATE */
+/* ================== LAST UPDATE ================== */
+const K_LASTUPDATE='ba_last_update';
 const lastUpdateEl=$("#lastUpdateLabel"), lastUpdateRel=$("#lastUpdateRelative"), manualUpdate=$("#manualUpdate");
-function loadLastUpdate(){const t=localStorage.getItem(K_LASTUPDATE);if(t)lastUpdateEl.textContent=new Date(+t).toLocaleString();else{lastUpdateEl.textContent='—';lastUpdateRel.textContent='';}}
-function updateLastUpdate(){const now=Date.now();localStorage.setItem(K_LASTUPDATE,String(now));loadLastUpdate();}
+function loadLastUpdate(){
+  const t=localStorage.getItem(K_LASTUPDATE);
+  if(t){lastUpdateEl.textContent=new Date(+t).toLocaleString();}
+  else {lastUpdateEl.textContent='—';lastUpdateRel.textContent='';}
+}
+function updateLastUpdate(){
+  const now=Date.now();
+  localStorage.setItem(K_LASTUPDATE,String(now));
+  loadLastUpdate();
+}
 manualUpdate?.addEventListener('click',()=>{if(!isAdmin){toast('Solo admin');return;}updateLastUpdate();toast('Timestamp actualizado');});
 function relativeFormat(ts){
-  const diff=Date.now()-ts,s=Math.floor(diff/1000);if(s<60)return'hace '+s+'s';
-  const m=Math.floor(s/60);if(m<60)return'hace '+m+'m';
-  const h=Math.floor(m/60);if(h<24)return'hace '+h+'h';
-  const d=Math.floor(h/24);return'hace '+d+'d';
+  const diff=Date.now()-ts;
+  const s=Math.floor(diff/1000);
+  if(s<60)return'hace '+s+'s';
+  const m=Math.floor(s/60);
+  if(m<60)return'hace '+m+'m';
+  const h=Math.floor(m/60);
+  if(h<24)return'hace '+h+'h';
+  const d=Math.floor(h/24);
+  return'hace '+d+'d';
+}
+function loopRelative(){
+  const t=localStorage.getItem(K_LASTUPDATE);
+  if(t) lastUpdateRel.textContent=relativeFormat(+t);
+  requestAnimationFrame(loopRelative);
 }
 
-/* RELATIVE LOOP */
-function loopRelative(){const t=localStorage.getItem(K_LASTUPDATE);if(t)lastUpdateRel.textContent=relativeFormat(+t);requestAnimationFrame(loopRelative);}
+/* ================== BACKGROUND / CURSOR / TILT ================== */
+const bgParticles=$("#bgParticles"), bgAurora=$("#bgAurora"), bgCar=$("#bgCar"), bgImg=$("#bgImage");
+let pCtx,pArr=[],pRAF,backgroundApplied=false;
+function hideAllBg(){[bgParticles,bgAurora,bgCar,bgImg].forEach(e=>e.style.display='none');cancelAnimationFrame(pRAF);}
+function startParticles(){
+  bgParticles.style.display='block';
+  pCtx=bgParticles.getContext('2d');
+  function resize(){
+    bgParticles.width=innerWidth;bgParticles.height=innerHeight;
+    const count=Math.floor((innerWidth*innerHeight)/26000);
+    pArr=Array.from({length:count},()=>({
+      x:Math.random()*innerWidth,
+      y:Math.random()*innerHeight,
+      vx:(Math.random()-.5)*0.28,
+      vy:(Math.random()-.5)*0.28
+    }));
+  }
+  resize();
+  addEventListener('resize',resize);
+  (function frame(){
+    pCtx.clearRect(0,0,innerWidth,innerHeight);
+    pArr.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x+=innerWidth;else if(p.x>innerWidth)p.x-=innerWidth;
+      if(p.y<0)p.y+=innerHeight;else if(p.y>innerHeight)p.y-=innerHeight;
+      pCtx.fillStyle='rgba(215,225,255,.38)';
+      pCtx.fillRect(p.x,p.y,2.2,2.2);
+    });
+    pRAF=requestAnimationFrame(frame);
+  })();
+}
+function hourBackground(){
+  const h=new Date().getHours();
+  if(h>=6&&h<12)return'particles';
+  if(h>=12&&h<18)return'aurora';
+  if(h>=18&&h<=23)return'car';
+  return'car';
+}
+function applyBackground(force=false){
+  if(!force && backgroundApplied && !settings.dynamicBG)return;
+  hideAllBg();
+  let mode=settings.bgMode;
+  if(settings.dynamicBG) mode=hourBackground();
+  if(mode==='car') bgCar.style.display='block';
+  else if(mode==='particles') startParticles();
+  else if(mode==='aurora') bgAurora.style.display='block';
+  else if(mode==='image'){
+    bgImg.style.display='block';
+    bgImg.style.backgroundImage=settings.bgImageUrl?`url("${settings.bgImageUrl}")`:'none';
+  }
+  backgroundApplied=true;
+}
 
-/* MODES */
-const cleanBtn=$("#toggleClean"), streamBtn=$("#toggleStream"), modeBadge=$("#modeBadge"), logoFitBtn=$("#toggleLogoFit"), logoFitChk=$("#logoFitToggleChk");
+const cursorDot=document.createElement('div'), cursorRing=document.createElement('div');
+cursorDot.className='cursor-dot';cursorRing.className='cursor-ring';
+function injectCursor(){document.body.appendChild(cursorDot);document.body.appendChild(cursorRing);}
+function applyCursor(style){
+  if(style==='off'||!matchMedia('(pointer:fine)').matches){
+    cursorDot.style.display='none';cursorRing.style.display='none';return;
+  }
+  cursorDot.style.cssText='position:fixed;top:0;left:0;width:6px;height:6px;background:#fff;border-radius:50%;pointer-events:none;z-index:1000;display:block;transform:translate(-50%,-50%)';
+  cursorRing.style.cssText='position:fixed;top:0;left:0;width:38px;height:38px;border:2px solid rgba(255,255,255,.35);border-radius:50%;pointer-events:none;z-index:1000;display:block;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s';
+  cursorRing.classList.toggle('glow',style==='glow');
+  if(!cursorDot.dataset.started){
+    cursorDot.dataset.started='1';
+    let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+    (function loop(){
+      rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;
+      cursorDot.style.transform=`translate(${mx}px,${my}px)`;
+      cursorRing.style.transform=`translate(${rx}px,${ry}px)`;
+      requestAnimationFrame(loop);
+    })();
+    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
+    addEventListener('mousedown',()=>{cursorRing.style.width='56px';cursorRing.style.height='56px';});
+    addEventListener('mouseup',()=>{cursorRing.style.width='38px';cursorRing.style.height='38px';});
+  }
+}
+function applyTilt(on){
+  $$('.srv-card').forEach(el=>{
+    el.onmousemove=null;el.onmouseleave=null;el.style.transform='';
+    if(!on||!matchMedia('(pointer:fine)').matches||document.body.classList.contains('streaming-mode'))return;
+    let af=null,tx=0,ty=0,cx=0,cy=0;
+    function anim(){af=null;cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(900px) rotateX(${cx}deg) rotateY(${cy}deg)`;if(Math.abs(cx-tx)>0.05||Math.abs(cy-ty)>0.05)af=requestAnimationFrame(anim);}
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      tx=(0.5-y)*9;ty=(x-0.5)*9;
+      if(!af)af=requestAnimationFrame(anim);
+    });
+    el.addEventListener('mouseleave',()=>{tx=ty=0;if(!af)af=requestAnimationFrame(anim);});
+  });
+}
+
+/* ================== SETTINGS / MODES ================== */
 function applyLogoFit(){
-  document.body.classList.toggle('server-cover-mode', !!settings.logoCover);
-  logoFitBtn.classList.toggle('is-active', settings.logoCover);
-  if(logoFitChk) logoFitChk.checked=settings.logoCover;
+  document.body.classList.toggle('server-cover-mode',!!settings.logoCover);
+  $('#toggleLogoFit').classList.toggle('is-active',settings.logoCover);
+  if($('#logoFitToggleChk')) $('#logoFitToggleChk').checked=settings.logoCover;
 }
 function applyModes(){
-  document.body.classList.toggle('clean-mode', settings.cleanMode);
-  document.body.classList.toggle('streaming-mode', settings.streamMode);
-  if(settings.streamMode){audioEl.muted=true;playBtn.innerHTML='<i class="fa-solid fa-play"></i> Play';modeBadge.style.display='block';}
-  else{modeBadge.style.display='none';if(!audioEl.paused) audioEl.muted=false;}
+  document.body.classList.toggle('clean-mode',settings.cleanMode);
+  document.body.classList.toggle('streaming-mode',settings.streamMode);
+  if(settings.streamMode){audioEl.muted=true;playBtn.innerHTML='<i class="fa-solid fa-play"></i> Play';$('#modeBadge').style.display='block';}
+  else{$('#modeBadge').style.display='none';if(!audioEl.paused)audioEl.muted=false;}
   applyTilt(settings.tilt);
 }
 function refreshModeButtons(){
-  cleanBtn.classList.toggle('is-active', settings.cleanMode);
-  streamBtn.classList.toggle('is-active', settings.streamMode);
+  $('#toggleClean').classList.toggle('is-active',settings.cleanMode);
+  $('#toggleStream').classList.toggle('is-active',settings.streamMode);
+  $('#toggleLogoFit').classList.toggle('is-active',settings.logoCover);
 }
-cleanBtn.addEventListener('click',()=>{
+$('#toggleClean').addEventListener('click',()=>{
   settings.cleanMode=!settings.cleanMode;saveSettings();applyModes();refreshModeButtons();toast(settings.cleanMode?'Clean Mode ON':'Clean Mode OFF');
 });
-streamBtn.addEventListener('click',()=>{
+$('#toggleStream').addEventListener('click',()=>{
   settings.streamMode=!settings.streamMode;saveSettings();applyModes();refreshModeButtons();toast(settings.streamMode?'Stream Mode ON':'Stream Mode OFF');
 });
-logoFitBtn.addEventListener('click',()=>{
+$('#toggleLogoFit').addEventListener('click',()=>{
   settings.logoCover=!settings.logoCover;saveSettings();applyLogoFit();toast(settings.logoCover?'Logos COVER':'Logos CONTAIN');
-});
-logoFitChk?.addEventListener('change',()=>{
-  settings.logoCover=logoFitChk.checked;saveSettings();applyLogoFit();
 });
 
 /* SETTINGS PANEL */
@@ -1211,7 +1253,7 @@ function populateSettingsPanel(){
   $("#dynamicBgToggle").checked=settings.dynamicBG;
   $("#cleanToggle").checked=settings.cleanMode;
   $("#streamToggle").checked=settings.streamMode;
-  if(logoFitChk) logoFitChk.checked=settings.logoCover;
+  if($('#logoFitToggleChk')) $('#logoFitToggleChk').checked=settings.logoCover;
 }
 $("#bgModeRow").addEventListener('change',e=>{
   if(e.target.name==='bgmode') $("#bgImageField").style.display=e.target.value==='image'?'block':'none';
@@ -1226,70 +1268,106 @@ $("#settingsSave").addEventListener('click',()=>{
   settings.dynamicBG=$("#dynamicBgToggle").checked;
   settings.cleanMode=$("#cleanToggle").checked;
   settings.streamMode=$("#streamToggle").checked;
-  settings.logoCover=logoFitChk?logoFitChk.checked:settings.logoCover;
+  settings.logoCover=$('#logoFitToggleChk')?$('#logoFitToggleChk').checked:settings.logoCover;
   saveSettings();
   audioEl.volume=settings.musicInitVol;
   applyBackground(true);applyCursor(settings.cursor);applyModes();refreshModeButtons();applyLogoFit();
-  toast('Configuración guardada');settingsPanel.classList.remove('open');
+  toast('Configuración guardada');
+  settingsPanel.classList.remove('open');
 });
 
-/* COPY / RIPPLE */
+/* ================== COPY & RIPPLE ================== */
 document.addEventListener('click',e=>{
-  const btn=e.target.closest('.btn,.icon-btn,.mode-btn,.srv-btn');if(btn) ripple(e,btn);
+  const btn=e.target.closest('.btn,.icon-btn,.mode-btn,.srv-btn,.admin-toolbar button');
+  if(btn) ripple(e,btn);
   const cp=e.target.closest('[data-copy]');
   if(cp) navigator.clipboard?.writeText(cp.getAttribute('data-copy')||'').then(()=>toast('Copiado')).catch(()=>toast('Error copiar'));
 });
 
-/* DEBUG */
+/* Ripple */
+function ripple(e,btn){
+  const r=document.createElement('span');
+  r.className='ripple';
+  const rect=btn.getBoundingClientRect();
+  r.style.left=(e.clientX-rect.left)+'px';
+  r.style.top=(e.clientY-rect.top)+'px';
+  btn.appendChild(r);
+  r.addEventListener('animationend',()=>r.remove());
+}
+
+/* ================== DEBUG ================== */
 const debugParam=new URLSearchParams(location.search).has('debug');window._debug=debugParam;
 if(window._debug) $("#toggleDebug").hidden=false;
 $("#toggleDebug").addEventListener('click',()=>$("#debugPanel").classList.toggle('show'));
 
-/* HOTKEYS */
+/* ================== HOTKEYS ================== */
 document.addEventListener('keydown',e=>{
   if(e.altKey&&e.shiftKey){
     switch(e.key.toLowerCase()){
-      case'a':requestAdmin();break;
-      case'x':revokeAdmin();break;
-      case'o':requestOwner();break;
-      case'p':revokeOwner();break;
-      case'e':toggleGlobalEdit();break;
+      case 'a': requestAdmin();break;
+      case 'x': revokeAdmin();break;
+      case 'e': if(isAdmin) toggleEdit();break;
+      case 'd': if(isAdmin) toggleDrag();break;
+      case 'c': if(isAdmin) cycleAccent();break;
+      case 'f': if(isAdmin) cycleFocusServer();break;
     }
   }
 });
 
-/* CLEAN stray dots */
+/* ================== CLEAN stray dots ================== */
 (function cleanDots(){
-  const junk=/^([.·•])+$/;const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
-  const kill=[];while(walker.nextNode()){const n=walker.currentNode;if(junk.test(n.textContent.trim())) kill.push(n);}
+  const junk=/^([.·•])+$/;
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+  const kill=[];while(walker.nextNode()){const n=walker.currentNode;if(junk.test(n.textContent.trim()))kill.push(n);}
   kill.forEach(n=>n.remove());
 })();
 
-/* ENTRY */
+/* ================== ADMIN TOOLBAR EVENTS ================== */
+$('#btnToggleEdit').addEventListener('click',()=>{if(!isAdmin){toast('Admin');return;}toggleEdit();});
+$('#btnToggleDrag').addEventListener('click',()=>{if(!isAdmin){toast('Admin');return;}toggleDrag();});
+$('#btnAccent').addEventListener('click',()=>{if(!isAdmin)return;cycleAccent();});
+$('#btnFocusCycle').addEventListener('click',()=>{if(!isAdmin)return;cycleFocusServer();});
+$('#btnConfetti').addEventListener('click',()=>{if(!isAdmin)return;launchConfetti();});
+$('#btnRndBG').addEventListener('click',()=>{if(!isAdmin)return;randomBackground();});
+$('#btnCompact').addEventListener('click',()=>{if(!isAdmin)return;toggleCompact();});
+$('#btnExport').addEventListener('click',()=>{if(!isAdmin)return;exportData();});
+
+/* ================== APPLY STATE ================== */
+function updateAdminStates(){
+  if(!isAdmin){
+    disableEditMode();
+    disableDragMode();
+  }
+}
+
+/* ================== ENTRY ================== */
 $("#year").textContent=new Date().getFullYear();
 $("#entry").addEventListener('click',()=>{
-  $("#entry").classList.add('fade-out');setTimeout(()=>$("#entry").remove(),560);
+  $("#entry").classList.add('fade-out');
+  setTimeout(()=>$("#entry").remove(),560);
   applyBackground(true);injectCursor();applyCursor(settings.cursor);applyTilt(settings.tilt);
   audioEl.volume=settings.musicInitVol;
   if(settings.musicAutoplay){
     audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();})
-      .catch(()=>toast('Autoplay bloqueado'));
+    .catch(()=>toast('Autoplay bloqueado'));
   } else updateMusicState();
   initViews();fixEmojiSpacing();
 },{once:true});
 
-/* RELATIVE LOOP START */
+/* ================== LOOP RELATIVE ================== */
 loopRelative();
 
-/* INIT */
+/* ================== INIT ================== */
 function init(){
-  restoreOwnerTexts();restoreOrders();
-  if(['aurora','image'].includes(settings.bgMode) || settings.dynamicBG) applyBackground(true);
+  restoreTextEdits();
+  restoreLayoutOrder();
+  if(['aurora','image'].includes(settings.bgMode)||settings.dynamicBG)applyBackground(true);
   loadDoing();loadObjectives();loadChangelog();loadLastUpdate();loadSession();
   applyModes();refreshModeButtons();applyLogoFit();
   audioEl.volume=settings.musicInitVol;updateMusicState();renderSessionTicker();updateViewsUI();fixEmojiSpacing();
 }
 init();
+
 </script>
 </body>
 </html>
