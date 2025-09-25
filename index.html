@@ -110,10 +110,9 @@ font-size:.85rem;font-weight:600;cursor:pointer;transition:transform .26s,border
 .s-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3);background:linear-gradient(175deg,rgba(255,255,255,.15),rgba(255,255,255,.05))}
 .s-thumb{width:48px;height:48px;border-radius:15px;overflow:hidden;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
 
-/* STATS */
+/* STATS (en extras) */
 .stats{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
 .stat-chip{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.17);padding:14px 18px;border-radius:16px;font-size:.82rem;font-weight:600;letter-spacing:.4px;min-width:160px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default;transition:box-shadow .35s}
-.stat-chip.dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.4)}
 
 /* SECTION TITLE */
 .section-title{margin:0 0 24px;font-size:1.26rem;letter-spacing:.55px;font-weight:600;display:flex;align-items:center;gap:10px}
@@ -205,12 +204,12 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
 /* CONFETTI CANVAS */
 #confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:450}
 
-/* ACCENT PULSE FOCUS */
-.focus-pulse .srv-card.now-focus{animation:pulse 2.5s ease-in-out infinite}
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 0 2px var(--accent),0 0 18px -4px var(--accent)}
-  50%{box-shadow:0 0 0 4px var(--accent),0 0 34px -4px var(--accent)}
-}
+/* DETAILS (EXTRAS) */
+#extrasWrapper{width:100%;max-width:1180px}
+#extrasWrapper details{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px}
+#extrasWrapper summary{cursor:pointer;list-style:none;font-size:.78rem;letter-spacing:.6px;font-weight:600;display:flex;align-items:center;gap:8px}
+#extrasWrapper summary::-webkit-details-marker{display:none}
+#extrasInner{display:grid;gap:20px;margin-top:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 
 /* COMPACT MODE */
 .compact .mini-panel.card{padding:18px 20px 20px}
@@ -218,13 +217,6 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
 .compact .ach-box{padding:16px 18px 18px}
 .compact .hero{gap:28px}
 .compact .social-icons{padding:12px 14px}
-
-/* DETAILS (EXTRAS) */
-#extrasWrapper{width:100%;max-width:1180px}
-#extrasWrapper details{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px}
-#extrasWrapper summary{cursor:pointer;list-style:none;font-size:.78rem;letter-spacing:.6px;font-weight:600;display:flex;align-items:center;gap:8px}
-#extrasWrapper summary::-webkit-details-marker{display:none}
-#extrasInner{display:grid;gap:20px;margin-top:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 </style>
 </head>
 <body>
@@ -250,9 +242,9 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
     <button id="openSettings" class="btn small" type="button"><i class="fa-solid fa-gear"></i> Settings</button>
     <button id="toggleDebug" class="btn small" type="button" hidden><i class="fa-solid fa-bug"></i> Debug</button>
     <div class="mode-toggle-bar">
-      <button id="toggleClean" class="mode-btn" type="button" title="Clean Mode"><i class="fa-solid fa-eye-slash"></i> Clean</button>
-      <button id="toggleStream" class="mode-btn" type="button" title="Streaming Mode"><i class="fa-solid fa-tower-broadcast"></i> Stream</button>
-      <button id="toggleLogoFit" class="mode-btn" type="button" title="Logos Cover"><i class="fa-solid fa-square"></i> Logos</button>
+      <button id="toggleClean" class="mode-btn" type="button"><i class="fa-solid fa-eye-slash"></i> Clean</button>
+      <button id="toggleStream" class="mode-btn" type="button"><i class="fa-solid fa-tower-broadcast"></i> Stream</button>
+      <button id="toggleLogoFit" class="mode-btn" type="button"><i class="fa-solid fa-square"></i> Logos</button>
     </div>
   </div>
 </nav>
@@ -295,7 +287,7 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
             <div class="s-thumb"><img src="assets/social/instagram.png" alt="Instagram"></div>
             <span data-editable>Instagram</span><small>Ver</small>
           </a>
-            <a class="s-card" href="https://www.paypal.com/paypalme/my/profile" target="_blank">
+          <a class="s-card" href="https://www.paypal.com/paypalme/my/profile" target="_blank">
             <div class="s-thumb"><img src="assets/social/paypal.png" alt="PayPal"></div>
             <span data-editable>PayPal</span><small>Support</small>
           </a>
@@ -303,7 +295,7 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
             <div class="s-thumb"><img src="assets/social/namemc.png" alt="NameMC"></div>
             <span data-editable>NameMC</span><small>Skin</small>
           </a>
-          <a class="s-card" href="https://www.tiktok.com/@tomasattanzio" target="_blank">
+            <a class="s-card" href="https://www.tiktok.com/@tomasattanzio" target="_blank">
             <div class="s-thumb"><img src="assets/social/tiktok.png" alt="TikTok"></div>
             <span data-editable>TikTok</span><small>Perfil</small>
           </a>
@@ -367,7 +359,7 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
             <div class="srv-meta"><h3 data-editable>DynamicPvP</h3><span class="srv-year" data-editable>Now</span></div>
           </div>
           <p class="srv-roles" data-editable>SS Verify y Mod</p>
-          <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
+            <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
     </div>
@@ -454,21 +446,19 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
     </div>
   </section>
 
-  <!-- EXTRAS (incluye Stats y otros paneles) -->
+  <!-- EXTRAS -->
   <div id="extrasWrapper" data-draggable>
     <details id="extrasDetails">
       <summary><i class="fa-solid fa-layer-group"></i> Extras</summary>
       <div id="extrasInner">
-        <!-- STATS -->
         <section class="stats card mini-panel" id="statsSection" data-draggable>
           <div class="stat-chip" data-editable>All Servers <strong>+6</strong></div>
           <div class="stat-chip" data-editable>SS Experience <strong>+2 Years</strong></div>
-            <div class="stat-chip" data-editable>SS Manager Experience <strong>1 Year</strong></div>
+          <div class="stat-chip" data-editable>SS Manager Experience <strong>1 Year</strong></div>
           <div class="stat-chip" data-editable>Cases Reviewed <strong>120+</strong></div>
-          <div class="stat-chip" id="viewsChip2" data-editable>Views <strong id="viewsValue">—</strong></div>
+          <div class="stat-chip" data-editable>Views <strong id="viewsChipValue">—</strong></div>
         </section>
 
-        <!-- Objetivos -->
         <div class="card mini-panel" id="panelObjectives" data-draggable>
           <div class="panel-head">
             <h3 data-editable>Próximos Objetivos</h3>
@@ -485,7 +475,6 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
           </div>
         </div>
 
-        <!-- Changelog -->
         <div class="card mini-panel" id="panelChangelog" data-draggable>
           <div class="panel-head">
             <h3 data-editable>Changelog / Updates</h3>
@@ -498,7 +487,6 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
           </div>
         </div>
 
-        <!-- Última actualización -->
         <div class="card mini-panel" id="panelLastUpdate" data-draggable>
           <div class="panel-head">
             <h3 data-editable>Última Actualización</h3>
@@ -508,13 +496,11 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
           <div class="last-update" id="lastUpdateRelative" style="opacity:.75"></div>
         </div>
 
-        <!-- Gallery -->
         <div class="card mini-panel" id="panelGallery" data-draggable>
           <div class="panel-head"><h3 data-editable>Evidencias</h3></div>
           <div class="placeholder-box" data-editable>PROXIMAMENTE...</div>
         </div>
 
-        <!-- Tools -->
         <div class="card mini-panel" id="panelTools" data-draggable>
           <div class="panel-head"><h3 data-editable>Herramientas</h3></div>
           <div class="placeholder-box" data-editable>PROXIMAMENTE...</div>
@@ -598,7 +584,7 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
 <div id="debugPanel"><strong>DEBUG</strong><pre id="debugLog"></pre></div>
 <div id="toast" role="status"></div>
 
-<!-- ADMIN TOOLBAR (sólo aparece en modo admin) -->
+<!-- ADMIN TOOLBAR -->
 <div class="admin-toolbar" id="adminToolbar" style="display:none">
   <div class="row">
     <button id="btnToggleEdit"><i class="fa-solid fa-pen-to-square"></i> Edit Text</button>
@@ -620,10 +606,8 @@ font-size:.6rem;line-height:1.4;display:none;z-index:140;backdrop-filter:blur(12
 
 <script>
 /* ================== CONFIG ================== */
-const ADMIN_HASH = "8d1a714fdc290c65b183a88f7d3b474634579ac6b73b8cdaf704490049591484"; // sha256 de tu clave admin
-let isAdmin=false;
-let editMode=false;
-let dragMode=false;
+const ADMIN_HASH = "8d1a714fdc290c65b183a88f7d3b474634579ac6b73b8cdaf704490049591484";
+let isAdmin=false,editMode=false,dragMode=false;
 
 const STORAGE_KEY='ba_final_custom_settings_v11';
 const defaults={bgMode:'car',bgImageUrl:'',tilt:true,cursor:'minimal',musicAutoplay:true,musicInitVol:0.65,dynamicBG:false,cleanMode:false,streamMode:false,logoCover:true};
@@ -633,13 +617,8 @@ const saveSettings=()=>localStorage.setItem(STORAGE_KEY,JSON.stringify(settings)
 /* ================== HELPERS ================== */
 const $=(s,c=document)=>c.querySelector(s);
 const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
-const toast=(m,d=1800)=>{const t=$("#toast");t.textContent=m;t.classList.add('show');clearTimeout(t._t);
-t._t=setTimeout(()=>t.classList.remove('show'),d);};
-const log=(m)=>{if(!window._debug)return;const l=$("#debugLog");l.textContent+=m+"\\n";l.scrollTop=l.scrollHeight;};
-async function sha256Hex(str){
-  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
-  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+const toast=(m,d=1800)=>{const t=$("#toast");t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),d);};
+async function sha256Hex(str){const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));return[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}
 function fixEmojiSpacingText(str){return str.replace(/([\p{Extended_Pictographic}])(?=[^\s\p{Extended_Pictographic}])/gu,'$1 ').replace(/ {2,}/g,' ');}
 function fixEmojiSpacing(root=document.body){
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);const arr=[];
@@ -659,24 +638,21 @@ async function requestAdmin(){
     document.documentElement.classList.add('admin-mode');
     $("#adminToolbar").style.display='flex';
     toast("Admin ON");
-    restoreTextEdits();
-    updateAdminStates();
+    restoreTextEdits();updateAdminStates();
   }else toast("Incorrecta");
 }
 function revokeAdmin(){
   isAdmin=false;
   document.documentElement.classList.remove('admin-mode');
   $("#adminToolbar").style.display='none';
-  disableEditMode();
-  disableDragMode();
+  disableEditMode();disableDragMode();
   toast("Admin OFF");
 }
 
 /* ================== TEXT EDITING ================== */
 const TEXT_KEY='ba_admin_text_map_v1';
 function enableEditMode(){
-  editMode=true;
-  document.body.classList.add('editable-active');
+  editMode=true;document.body.classList.add('editable-active');
   $$('[data-editable]').forEach(el=>{
     el.setAttribute('contenteditable','true');
     if(!el._saved){
@@ -687,12 +663,11 @@ function enableEditMode(){
   $('#btnToggleEdit').classList.add('active');
 }
 function disableEditMode(){
-  editMode=false;
-  document.body.classList.remove('editable-active');
+  editMode=false;document.body.classList.remove('editable-active');
   $$('[data-editable]').forEach(el=>el.removeAttribute('contenteditable'));
   $('#btnToggleEdit').classList.remove('active');
 }
-function toggleEdit(){ editMode?disableEditMode():enableEditMode(); }
+function toggleEdit(){editMode?disableEditMode():enableEditMode();}
 function saveEditableText(e){
   const map=JSON.parse(localStorage.getItem(TEXT_KEY)||'{}');
   const el=e.target;
@@ -711,12 +686,10 @@ function restoreTextEdits(){
 /* ================== DRAG & DROP ================== */
 let dragSrc=null;
 function enableDragMode(){
-  dragMode=true;
-  document.body.classList.add('drag-active');
+  dragMode=true;document.body.classList.add('drag-active');
   $$('[data-draggable], .stat-chip, .srv-card, .mini-panel.card, .ach-box').forEach(el=>{
     if(!el.dataset.dragReady){
-      el.dataset.dragReady='1';
-      el.setAttribute('draggable','true');
+      el.dataset.dragReady='1';el.setAttribute('draggable','true');
       el.addEventListener('dragstart',dragStart);
       el.addEventListener('dragover',dragOver);
       el.addEventListener('drop',dragDrop);
@@ -726,8 +699,7 @@ function enableDragMode(){
   $('#btnToggleDrag').classList.add('active');
 }
 function disableDragMode(){
-  dragMode=false;
-  document.body.classList.remove('drag-active');
+  dragMode=false;document.body.classList.remove('drag-active');
   $$('[draggable]').forEach(el=>{
     el.removeAttribute('draggable');
     el.removeEventListener('dragstart',dragStart);
@@ -752,7 +724,6 @@ function dragOver(e){
 }
 function dragDrop(e){e.stopPropagation();}
 function dragEnd(){this.classList.remove('dragging');saveLayoutOrder();}
-
 const LAYOUT_KEY='ba_layout_order_v2';
 function saveLayoutOrder(){
   const order=[...$('#appRoot').children].map(n=>n.id||'');
@@ -789,12 +760,11 @@ function cycleFocusServer(){
 
 /* ================== CONFETTI ================== */
 function launchConfetti(){
-  const canvas=$("#confettiCanvas");
-  const ctx=canvas.getContext('2d');
+  const canvas=$("#confettiCanvas"),ctx=canvas.getContext('2d');
   canvas.width=innerWidth;canvas.height=innerHeight;
   const pieces=Array.from({length:180},()=>({
     x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height - canvas.height,
+    y:Math.random()*canvas.height-canvas.height,
     r:4+Math.random()*6,
     c:`hsl(${Math.random()*360},85%,60%)`,
     vy:2+Math.random()*4,
@@ -808,36 +778,21 @@ function launchConfetti(){
     pieces.forEach(p=>{
       p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;
       if(p.y>canvas.height+20) p.y=-20;
-      ctx.save();
-      ctx.translate(p.x,p.y);
-      ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle=p.c;
-      ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);
-      ctx.restore();
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);ctx.restore();
     });
-    frame++;
-    if(frame<400) requestAnimationFrame(draw);
-    else ctx.clearRect(0,0,canvas.width,canvas.height);
+    frame++; if(frame<400) requestAnimationFrame(draw); else ctx.clearRect(0,0,canvas.width,canvas.height);
   }
   draw();
 }
 
-/* ================== RANDOM BACKGROUND ================== */
+/* ================== RANDOM BG & COMPACT & EXPORT ================== */
 function randomBackground(){
   const opts=['car','aurora','particles'];
   settings.bgMode=opts[Math.floor(Math.random()*opts.length)];
-  saveSettings();
-  applyBackground(true);
-  toast('BG: '+settings.bgMode);
+  saveSettings();applyBackground(true);toast('BG: '+settings.bgMode);
 }
-
-/* ================== COMPACT ================== */
-function toggleCompact(){
-  document.body.classList.toggle('compact');
-  $('#btnCompact').classList.toggle('active');
-}
-
-/* ================== EXPORT ================== */
+function toggleCompact(){document.body.classList.toggle('compact');$('#btnCompact').classList.toggle('active');}
 function exportData(){
   const data={
     text:JSON.parse(localStorage.getItem(TEXT_KEY)||'{}'),
@@ -847,13 +802,10 @@ function exportData(){
     lastUpdate:localStorage.getItem('ba_last_update')||'',
     viewsReal:localStorage.getItem('ba_views_real')||0,
     viewsAdj:localStorage.getItem('ba_views_adj')||0,
-    settings,
+    settings
   };
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='portfolio_export.json';
-  a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio_export.json';a.click();
   toast('Export listo');
 }
 
@@ -865,8 +817,8 @@ let viewsReal=Number(localStorage.getItem(K_VIEWS_REAL)||0);
 let viewsAdj=Number(localStorage.getItem(K_VIEWS_ADJ)||0);
 function updateViewsUI(){
   const total=viewsReal+viewsAdj;
-  $('#viewsDisplayed').textContent=total;
-  $('#viewsValue')?.textContent=total;
+  $('#viewsDisplayed')&&($('#viewsDisplayed').textContent=total);
+  $('#viewsChipValue')&&($('#viewsChipValue').textContent=total);
 }
 async function fetchView(hit){
   const url=hit?`${VIEW_API}/hit/${VIEW_NAMESPACE}/${VIEW_KEY}`:`${VIEW_API}/get/${VIEW_NAMESPACE}/${VIEW_KEY}`;
@@ -876,7 +828,7 @@ async function initViews(){
   const now=Date.now();const last=Number(localStorage.getItem(K_VIEWS_LAST_HIT)||0);
   const doHit=(now-last)>VISIT_COOLDOWN_MS;
   const val=await fetchView(doHit);
-  if(val!==null){viewsReal=val;localStorage.setItem(K_VIEWS_REAL,String(val));if(doHit)localStorage.setItem(K_VIEWS_LAST_HIT,String(now));}
+  if(val!==null){viewsReal=val;localStorage.setItem(K_VIEWS_REAL,String(val)); if(doHit)localStorage.setItem(K_VIEWS_LAST_HIT,String(now));}
   updateViewsUI();
 }
 $('#refreshViews')?.addEventListener('click',async()=>{
@@ -926,15 +878,16 @@ $$('.srv-card').forEach(c=>{
 
 /* ================== MUSIC ================== */
 const audioEl=$("#bgAudio");
-const playBtn=$("#playMusic"), volDown=$("#volDown"), volUp=$("#volUp"), muteBtn=$("#muteMusic"),
-      volSlider=$("#volumeSlider"), musicState=$("#musicState"), reloadBtn=$("#reloadAudio");
+const playBtn=$("#playMusic"),volDown=$("#volDown"),volUp=$("#volUp"),muteBtn=$("#muteMusic"),
+      volSlider=$("#volumeSlider"),musicState=$("#musicState"),reloadBtn=$("#reloadAudio");
 function updateMusicState(){
   const src=(audioEl.currentSrc.split('/').pop()||'cancion.mp3');
   musicState.textContent=(audioEl.paused?'Pausado: ':'Reproduciendo: ')+src+(audioEl.muted?' (Muted)':'');
 }
 playBtn.addEventListener('click',()=>{
   if(audioEl.paused){
-    audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();}).catch(()=>toast('Autoplay bloqueado'));
+    audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();})
+      .catch(()=>toast('Autoplay bloqueado'));
   }else{
     audioEl.pause();playBtn.innerHTML='<i class="fa-solid fa-play"></i> Play';updateMusicState();
   }
@@ -946,7 +899,7 @@ muteBtn.addEventListener('click',()=>{audioEl.muted=!audioEl.muted;muteBtn.inner
 volSlider.addEventListener('input',()=>{audioEl.volume=(volSlider.value|0)/100;audioEl.muted=audioEl.volume===0;updateMusicState();});
 
 /* ================== CURRENTLY DOING ================== */
-const doingEl=$("#doingContent"), editDoing=$("#editDoing");
+const doingEl=$("#doingContent"),editDoing=$("#editDoing");
 const K_DOING='ba_doing_text';
 function loadDoing(){doingEl.textContent=fixEmojiSpacingText(localStorage.getItem(K_DOING)||'Disponible');}
 function saveDoing(){
@@ -957,18 +910,16 @@ editDoing.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
   const editing=doingEl.getAttribute('contenteditable')==='true';
   if(!editing){
-    doingEl.setAttribute('contenteditable','true');
-    doingEl.focus();
+    doingEl.setAttribute('contenteditable','true');doingEl.focus();
     editDoing.innerHTML='<i class="fa-solid fa-floppy-disk"></i> Save';
   }else{
-    doingEl.setAttribute('contenteditable','false');
-    saveDoing();
+    doingEl.setAttribute('contenteditable','false');saveDoing();
     editDoing.innerHTML='<i class="fa-solid fa-pen"></i> Edit';
   }
 });
 
-/* ================== SS SESSION TIMER ================== */
-const startSessionBtn=$("#startSession"), endSessionBtn=$("#endSession");
+/* ================== SS SESSION ================== */
+const startSessionBtn=$("#startSession"),endSessionBtn=$("#endSession");
 const K_SS_SESSION_START='ba_ss_session_start';let sessionStart=null;
 function loadSession(){const s=localStorage.getItem(K_SS_SESSION_START);if(s)sessionStart=+s;}
 function startSession(){
@@ -982,12 +933,8 @@ function endSession(){
   if(!sessionStart){toast('No hay sesión');return;}
   const mins=Math.floor((Date.now()-sessionStart)/60000);
   addChangelogEntry(`Sesión SS finalizada (${mins} min)`);
-  localStorage.removeItem(K_SS_SESSION_START);
-  sessionStart=null;
-  delete doingEl.dataset.base;
-  saveDoing();
-  toast('Sesión terminada');
-  updateLastUpdate();
+  localStorage.removeItem(K_SS_SESSION_START);sessionStart=null;delete doingEl.dataset.base;
+  saveDoing();toast('Sesión terminada');updateLastUpdate();
 }
 startSessionBtn.addEventListener('click',startSession);
 endSessionBtn.addEventListener('click',endSession);
@@ -1000,25 +947,21 @@ function renderSessionTicker(){
 }
 
 /* ================== OBJECTIVES ================== */
-const objList=$("#objectivesList"), objInput=$("#newObjective"), objAdd=$("#addObjective"), objClear=$("#clearObjectives");
-const objProgressWrap=$("#objProgress"), objProgBar=$("#objProgBar"), objProgText=$("#objProgText");
+const objList=$("#objectivesList"),objInput=$("#newObjective"),objAdd=$("#addObjective"),objClear=$("#clearObjectives");
+const objProgressWrap=$("#objProgress"),objProgBar=$("#objProgBar"),objProgText=$("#objProgText");
 const K_OBJECTIVES='ba_objectives_list';
 function loadObjectives(){
   objList.innerHTML='';
   const arr=JSON.parse(localStorage.getItem(K_OBJECTIVES)||'[]');
   arr.forEach(o=>renderObjective(o));
-  updateObjectivesProgress();
-  fixEmojiSpacing(objList);
+  updateObjectivesProgress();fixEmojiSpacing(objList);
 }
 function saveObjectives(){
   const data=[...objList.children].map(li=>({text:li.dataset.text,done:li.classList.contains('done')}));
-  localStorage.setItem(K_OBJECTIVES,JSON.stringify(data));
-  updateObjectivesProgress();
+  localStorage.setItem(K_OBJECTIVES,JSON.stringify(data));updateObjectivesProgress();
 }
 function renderObjective(o){
-  const li=document.createElement('li');
-  const txt=fixEmojiSpacingText(o.text);
-  li.dataset.text=txt;
+  const li=document.createElement('li');const txt=fixEmojiSpacingText(o.text);li.dataset.text=txt;
   if(o.done)li.classList.add('done');
   li.innerHTML=`<span>${txt}</span>${isAdmin?'<button class="btn small icon danger" type="button" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>':''}`;
   li.addEventListener('click',e=>{
@@ -1052,20 +995,18 @@ function updateObjectivesProgress(){
 function refreshObjectivesEditButtons(){loadObjectives();}
 
 /* ================== CHANGELOG ================== */
-const clList=$("#changelogList"), clInput=$("#newChange"), clAdd=$("#addChange"), clClear=$("#clearChangelog");
+const clList=$("#changelogList"),clInput=$("#newChange"),clAdd=$("#addChange"),clClear=$("#clearChangelog");
 const K_CHANGELOG='ba_changelog_list';
 function loadChangelog(){
   clList.innerHTML='';
   const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]').sort((a,b)=>b.time-a.time);
-  arr.forEach(it=>renderChange(it));
-  fixEmojiSpacing(clList);
+  arr.forEach(it=>renderChange(it));fixEmojiSpacing(clList);
 }
 function saveChangelog(arr){localStorage.setItem(K_CHANGELOG,JSON.stringify(arr));}
 function addChangelogEntry(text){
   text=fixEmojiSpacingText(text);
   const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]');
-  arr.push({text,time:Date.now()});
-  saveChangelog(arr);loadChangelog();
+  arr.push({text,time:Date.now()});saveChangelog(arr);loadChangelog();
 }
 function renderChange(it){
   const li=document.createElement('li');
@@ -1086,62 +1027,42 @@ clClear?.addEventListener('click',()=>{
 
 /* ================== LAST UPDATE ================== */
 const K_LASTUPDATE='ba_last_update';
-const lastUpdateEl=$("#lastUpdateLabel"), lastUpdateRel=$("#lastUpdateRelative"), manualUpdate=$("#manualUpdate");
+const lastUpdateEl=$("#lastUpdateLabel"),lastUpdateRel=$("#lastUpdateRelative"),manualUpdate=$("#manualUpdate");
 function loadLastUpdate(){
   const t=localStorage.getItem(K_LASTUPDATE);
   if(t){lastUpdateEl.textContent=new Date(+t).toLocaleString();}
-  else {lastUpdateEl.textContent='—';lastUpdateRel.textContent='';}
+  else{lastUpdateEl.textContent='—';lastUpdateRel.textContent='';}
 }
-function updateLastUpdate(){
-  const now=Date.now();
-  localStorage.setItem(K_LASTUPDATE,String(now));
-  loadLastUpdate();
-}
+function updateLastUpdate(){const now=Date.now();localStorage.setItem(K_LASTUPDATE,String(now));loadLastUpdate();}
 manualUpdate?.addEventListener('click',()=>{if(!isAdmin){toast('Solo admin');return;}updateLastUpdate();toast('Timestamp actualizado');});
 function relativeFormat(ts){
-  const diff=Date.now()-ts;
-  const s=Math.floor(diff/1000);
-  if(s<60)return'hace '+s+'s';
-  const m=Math.floor(s/60);
-  if(m<60)return'hace '+m+'m';
-  const h=Math.floor(m/60);
-  if(h<24)return'hace '+h+'h';
-  const d=Math.floor(h/24);
+  const diff=Date.now()-ts;const s=Math.floor(diff/1000);
+  if(s<60)return'hace '+s+'s';const m=Math.floor(s/60);
+  if(m<60)return'hace '+m+'m';const h=Math.floor(m/60);
+  if(h<24)return'hace '+h+'h';const d=Math.floor(h/24);
   return'hace '+d+'d';
 }
-function loopRelative(){
-  const t=localStorage.getItem(K_LASTUPDATE);
-  if(t) lastUpdateRel.textContent=relativeFormat(+t);
-  requestAnimationFrame(loopRelative);
-}
+function loopRelative(){const t=localStorage.getItem(K_LASTUPDATE);if(t)lastUpdateRel.textContent=relativeFormat(+t);requestAnimationFrame(loopRelative);}
 
 /* ================== BACKGROUND / CURSOR / TILT ================== */
-const bgParticles=$("#bgParticles"), bgAurora=$("#bgAurora"), bgCar=$("#bgCar"), bgImg=$("#bgImage");
+const bgParticles=$("#bgParticles"),bgAurora=$("#bgAurora"),bgCar=$("#bgCar"),bgImg=$("#bgImage");
 let pCtx,pArr=[],pRAF,backgroundApplied=false;
 function hideAllBg(){[bgParticles,bgAurora,bgCar,bgImg].forEach(e=>e.style.display='none');cancelAnimationFrame(pRAF);}
 function startParticles(){
-  bgParticles.style.display='block';
-  pCtx=bgParticles.getContext('2d');
+  bgParticles.style.display='block';pCtx=bgParticles.getContext('2d');
   function resize(){
     bgParticles.width=innerWidth;bgParticles.height=innerHeight;
     const count=Math.floor((innerWidth*innerHeight)/26000);
-    pArr=Array.from({length:count},()=>({
-      x:Math.random()*innerWidth,
-      y:Math.random()*innerHeight,
-      vx:(Math.random()-.5)*0.28,
-      vy:(Math.random()-.5)*0.28
-    }));
+    pArr=Array.from({length:count},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*0.28,vy:(Math.random()-.5)*0.28}));
   }
-  resize();
-  addEventListener('resize',resize);
+  resize();addEventListener('resize',resize);
   (function frame(){
     pCtx.clearRect(0,0,innerWidth,innerHeight);
     pArr.forEach(p=>{
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0)p.x+=innerWidth;else if(p.x>innerWidth)p.x-=innerWidth;
       if(p.y<0)p.y+=innerHeight;else if(p.y>innerHeight)p.y-=innerHeight;
-      pCtx.fillStyle='rgba(215,225,255,.38)';
-      pCtx.fillRect(p.x,p.y,2.2,2.2);
+      pCtx.fillStyle='rgba(215,225,255,.38)';pCtx.fillRect(p.x,p.y,2.2,2.2);
     });
     pRAF=requestAnimationFrame(frame);
   })();
@@ -1155,38 +1076,26 @@ function hourBackground(){
 }
 function applyBackground(force=false){
   if(!force && backgroundApplied && !settings.dynamicBG)return;
-  hideAllBg();
-  let mode=settings.bgMode;
+  hideAllBg();let mode=settings.bgMode;
   if(settings.dynamicBG) mode=hourBackground();
   if(mode==='car') bgCar.style.display='block';
   else if(mode==='particles') startParticles();
   else if(mode==='aurora') bgAurora.style.display='block';
-  else if(mode==='image'){
-    bgImg.style.display='block';
-    bgImg.style.backgroundImage=settings.bgImageUrl?`url("${settings.bgImageUrl}")`:'none';
-  }
+  else if(mode==='image'){bgImg.style.display='block';bgImg.style.backgroundImage=settings.bgImageUrl?`url("${settings.bgImageUrl}")`:'none';}
   backgroundApplied=true;
 }
-
-const cursorDot=document.createElement('div'), cursorRing=document.createElement('div');
+const cursorDot=document.createElement('div'),cursorRing=document.createElement('div');
 cursorDot.className='cursor-dot';cursorRing.className='cursor-ring';
 function injectCursor(){document.body.appendChild(cursorDot);document.body.appendChild(cursorRing);}
 function applyCursor(style){
-  if(style==='off'||!matchMedia('(pointer:fine)').matches){
-    cursorDot.style.display='none';cursorRing.style.display='none';return;
-  }
+  if(style==='off'||!matchMedia('(pointer:fine)').matches){cursorDot.style.display='none';cursorRing.style.display='none';return;}
   cursorDot.style.cssText='position:fixed;top:0;left:0;width:6px;height:6px;background:#fff;border-radius:50%;pointer-events:none;z-index:1000;display:block;transform:translate(-50%,-50%)';
   cursorRing.style.cssText='position:fixed;top:0;left:0;width:38px;height:38px;border:2px solid rgba(255,255,255,.35);border-radius:50%;pointer-events:none;z-index:1000;display:block;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s';
   cursorRing.classList.toggle('glow',style==='glow');
   if(!cursorDot.dataset.started){
     cursorDot.dataset.started='1';
     let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-    (function loop(){
-      rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;
-      cursorDot.style.transform=`translate(${mx}px,${my}px)`;
-      cursorRing.style.transform=`translate(${rx}px,${ry}px)`;
-      requestAnimationFrame(loop);
-    })();
+    (function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;cursorDot.style.transform=`translate(${mx}px,${my}px)`;cursorRing.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(loop);})();
     addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
     addEventListener('mousedown',()=>{cursorRing.style.width='56px';cursorRing.style.height='56px';});
     addEventListener('mouseup',()=>{cursorRing.style.width='38px';cursorRing.style.height='38px';});
@@ -1200,14 +1109,13 @@ function applyTilt(on){
     function anim(){af=null;cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(900px) rotateX(${cx}deg) rotateY(${cy}deg)`;if(Math.abs(cx-tx)>0.05||Math.abs(cy-ty)>0.05)af=requestAnimationFrame(anim);}
     el.addEventListener('mousemove',e=>{
       const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-      tx=(0.5-y)*9;ty=(x-0.5)*9;
-      if(!af)af=requestAnimationFrame(anim);
+      tx=(0.5-y)*9;ty=(x-0.5)*9;if(!af)af=requestAnimationFrame(anim);
     });
     el.addEventListener('mouseleave',()=>{tx=ty=0;if(!af)af=requestAnimationFrame(anim);});
   });
 }
 
-/* ================== SETTINGS / MODES ================== */
+/* ================== MODES / SETTINGS ================== */
 function applyLogoFit(){
   document.body.classList.toggle('server-cover-mode',!!settings.logoCover);
   $('#toggleLogoFit').classList.toggle('is-active',settings.logoCover);
@@ -1225,15 +1133,9 @@ function refreshModeButtons(){
   $('#toggleStream').classList.toggle('is-active',settings.streamMode);
   $('#toggleLogoFit').classList.toggle('is-active',settings.logoCover);
 }
-$('#toggleClean').addEventListener('click',()=>{
-  settings.cleanMode=!settings.cleanMode;saveSettings();applyModes();refreshModeButtons();toast(settings.cleanMode?'Clean Mode ON':'Clean Mode OFF');
-});
-$('#toggleStream').addEventListener('click',()=>{
-  settings.streamMode=!settings.streamMode;saveSettings();applyModes();refreshModeButtons();toast(settings.streamMode?'Stream Mode ON':'Stream Mode OFF');
-});
-$('#toggleLogoFit').addEventListener('click',()=>{
-  settings.logoCover=!settings.logoCover;saveSettings();applyLogoFit();toast(settings.logoCover?'Logos COVER':'Logos CONTAIN');
-});
+$('#toggleClean').addEventListener('click',()=>{settings.cleanMode=!settings.cleanMode;saveSettings();applyModes();refreshModeButtons();toast(settings.cleanMode?'Clean ON':'Clean OFF');});
+$('#toggleStream').addEventListener('click',()=>{settings.streamMode=!settings.streamMode;saveSettings();applyModes();refreshModeButtons();toast(settings.streamMode?'Stream ON':'Stream OFF');});
+$('#toggleLogoFit').addEventListener('click',()=>{settings.logoCover=!settings.logoCover;saveSettings();applyLogoFit();toast(settings.logoCover?'Logos COVER':'Logos CONTAIN');});
 
 /* SETTINGS PANEL */
 const settingsPanel=$("#settingsPanel");
@@ -1283,16 +1185,11 @@ document.addEventListener('click',e=>{
   const cp=e.target.closest('[data-copy]');
   if(cp) navigator.clipboard?.writeText(cp.getAttribute('data-copy')||'').then(()=>toast('Copiado')).catch(()=>toast('Error copiar'));
 });
-
-/* Ripple */
 function ripple(e,btn){
-  const r=document.createElement('span');
-  r.className='ripple';
+  const r=document.createElement('span');r.className='ripple';
   const rect=btn.getBoundingClientRect();
-  r.style.left=(e.clientX-rect.left)+'px';
-  r.style.top=(e.clientY-rect.top)+'px';
-  btn.appendChild(r);
-  r.addEventListener('animationend',()=>r.remove());
+  r.style.left=(e.clientX-rect.left)+'px';r.style.top=(e.clientY-rect.top)+'px';
+  btn.appendChild(r);r.addEventListener('animationend',()=>r.remove());
 }
 
 /* ================== DEBUG ================== */
@@ -1304,17 +1201,17 @@ $("#toggleDebug").addEventListener('click',()=>$("#debugPanel").classList.toggle
 document.addEventListener('keydown',e=>{
   if(e.altKey&&e.shiftKey){
     switch(e.key.toLowerCase()){
-      case 'a': requestAdmin();break;
-      case 'x': revokeAdmin();break;
-      case 'e': if(isAdmin) toggleEdit();break;
-      case 'd': if(isAdmin) toggleDrag();break;
-      case 'c': if(isAdmin) cycleAccent();break;
-      case 'f': if(isAdmin) cycleFocusServer();break;
+      case 'a':requestAdmin();break;
+      case 'x':revokeAdmin();break;
+      case 'e':if(isAdmin)toggleEdit();break;
+      case 'd':if(isAdmin)toggleDrag();break;
+      case 'c':if(isAdmin)cycleAccent();break;
+      case 'f':if(isAdmin)cycleFocusServer();break;
     }
   }
 });
 
-/* ================== CLEAN stray dots ================== */
+/* ================== CLEAN DOTS ================== */
 (function cleanDots(){
   const junk=/^([.·•])+$/;
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
@@ -1322,7 +1219,7 @@ document.addEventListener('keydown',e=>{
   kill.forEach(n=>n.remove());
 })();
 
-/* ================== ADMIN TOOLBAR EVENTS ================== */
+/* ================== ADMIN TOOLBAR BUTTONS ================== */
 $('#btnToggleEdit').addEventListener('click',()=>{if(!isAdmin){toast('Admin');return;}toggleEdit();});
 $('#btnToggleDrag').addEventListener('click',()=>{if(!isAdmin){toast('Admin');return;}toggleDrag();});
 $('#btnAccent').addEventListener('click',()=>{if(!isAdmin)return;cycleAccent();});
@@ -1332,42 +1229,55 @@ $('#btnRndBG').addEventListener('click',()=>{if(!isAdmin)return;randomBackground
 $('#btnCompact').addEventListener('click',()=>{if(!isAdmin)return;toggleCompact();});
 $('#btnExport').addEventListener('click',()=>{if(!isAdmin)return;exportData();});
 
-/* ================== APPLY STATE ================== */
-function updateAdminStates(){
-  if(!isAdmin){
-    disableEditMode();
-    disableDragMode();
-  }
+/* ================== STATE HELPERS ================== */
+function updateAdminStates(){if(!isAdmin){disableEditMode();disableDragMode();}}
+
+/* ================== ENTRY (ROBUST) ================== */
+function entryAction(){
+  const entry=$("#entry");
+  if(!entry)return;
+  entry.classList.add('fade-out');
+  setTimeout(()=>entry.remove(),560);
+  try{
+    applyBackground(true);injectCursor();applyCursor(settings.cursor);applyTilt(settings.tilt);
+    audioEl.volume=settings.musicInitVol;
+    if(settings.musicAutoplay){
+      audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();})
+        .catch(()=>toast('Autoplay bloqueado'));
+    } else updateMusicState();
+    initViews();fixEmojiSpacing();
+  }catch(err){console.error('Entry init error',err);toast('Error init');}
 }
+(function attachEntry(){
+  const entry=$("#entry");
+  if(!entry){console.warn('No #entry');return;}
+  entry.addEventListener('click',()=>entryAction(),{once:true});
+  // Teclas Enter / Space
+  document.addEventListener('keydown',e=>{
+    if(!document.getElementById('entry'))return;
+    if(e.key==='Enter'||e.key===' '){entryAction();}
+  });
+  // Botón fallback
+  const fb=document.createElement('button');
+  fb.type='button';fb.textContent='ENTER';
+  fb.style.cssText='position:absolute;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 20px;font-size:.65rem;font-weight:600;letter-spacing:.6px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;border-radius:14px;cursor:pointer';
+  fb.addEventListener('click',entryAction,{once:true});
+  entry.appendChild(fb);
+})();
 
-/* ================== ENTRY ================== */
-$("#year").textContent=new Date().getFullYear();
-$("#entry").addEventListener('click',()=>{
-  $("#entry").classList.add('fade-out');
-  setTimeout(()=>$("#entry").remove(),560);
-  applyBackground(true);injectCursor();applyCursor(settings.cursor);applyTilt(settings.tilt);
-  audioEl.volume=settings.musicInitVol;
-  if(settings.musicAutoplay){
-    audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();})
-    .catch(()=>toast('Autoplay bloqueado'));
-  } else updateMusicState();
-  initViews();fixEmojiSpacing();
-},{once:true});
-
-/* ================== LOOP RELATIVE ================== */
+/* ================== RELATIVE LOOP ================== */
 loopRelative();
 
 /* ================== INIT ================== */
 function init(){
-  restoreTextEdits();
-  restoreLayoutOrder();
+  restoreTextEdits();restoreLayoutOrder();
   if(['aurora','image'].includes(settings.bgMode)||settings.dynamicBG)applyBackground(true);
   loadDoing();loadObjectives();loadChangelog();loadLastUpdate();loadSession();
   applyModes();refreshModeButtons();applyLogoFit();
   audioEl.volume=settings.musicInitVol;updateMusicState();renderSessionTicker();updateViewsUI();fixEmojiSpacing();
+  $("#year").textContent=new Date().getFullYear();
 }
 init();
-
 </script>
 </body>
 </html>
