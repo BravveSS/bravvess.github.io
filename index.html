@@ -118,7 +118,7 @@ font-size:.85rem;font-weight:600;cursor:pointer;transition:transform .26s,border
 .section-title{margin:0 0 24px;font-size:1.26rem;letter-spacing:.55px;font-weight:600;display:flex;align-items:center;gap:10px;cursor:default}
 .section-title[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
 
-/* DRAG highlight for blocks */
+/* DRAG highlight */
 .owner-mode [data-owner-block]{position:relative}
 .owner-mode [data-owner-block]:hover{outline:1px dashed rgba(255,255,255,.35)}
 .owner-mode [data-owner-block].dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.55)}
@@ -207,7 +207,7 @@ transition:transform .26s,background .26s;display:inline-flex;align-items:center
 .owner-mode [data-owner-editable]:hover{outline:1px dashed rgba(255,255,255,.35)}
 .owner-mode [contenteditable="true"]{outline:2px solid rgba(255,255,255,.55)!important;border-radius:6px;padding:2px 4px}
 
-/* MODES HIDE */
+/* MODES */
 .clean-mode .servers,
 .clean-mode .achievements,
 .clean-mode .music,
@@ -241,7 +241,7 @@ transition:transform .26s,background .26s;display:inline-flex;align-items:center
 .mode-btn.is-active{background:linear-gradient(180deg,rgba(120,200,255,.38),rgba(120,200,255,.15));
   box-shadow:0 0 0 1px rgba(120,200,255,.7),0 0 14px -2px rgba(120,200,255,.9);border-color:rgba(120,200,255,.7)}
 
-/* OVERLAY MODAL (custom) */
+/* OVERLAY MODAL */
 #serverOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:220;background:rgba(0,0,0,.55);backdrop-filter:blur(8px)}
 #serverOverlay.open{display:flex}
 .server-modal-box{width:min(92vw,720px);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:30px;
@@ -330,6 +330,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
 
 <main class="page" id="appRoot">
 
+  <!-- 1 HERO -->
   <header class="hero card" data-owner-block>
     <div class="avatar-wrap">
       <img class="avatar" src="assets/profile.jpg" alt="Perfil">
@@ -386,14 +387,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </header>
 
-  <section class="stats card" id="statsSection" data-owner-block>
-    <div class="stat-chip" data-owner-editable>All Servers <strong>+6</strong></div>
-    <div class="stat-chip" data-owner-editable>SS Experience <strong>+2 Years</strong></div>
-    <div class="stat-chip" data-owner-editable>SS Manager Experience <strong>1 Year</strong></div>
-    <div class="stat-chip" data-owner-editable>Cases Reviewed <strong>120+</strong></div>
-    <div class="stat-chip" id="viewsChip" data-owner-editable>Views <strong id="viewsValue">—</strong></div>
-  </section>
-
+  <!-- 2 SERVIDORES -->
   <section class="servers card" id="serversSection" data-owner-block>
     <h2 class="section-title" data-owner-editable><i class="fa-solid fa-server"></i> Servidores</h2>
     <div class="grid" id="serversGrid">
@@ -423,7 +417,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
             <div class="srv-logo"><img src="assets/infernalmc.png" alt="InfernalMC"></div>
             <div class="srv-meta"><h3 data-owner-editable>InfernalMC</h3><span class="srv-year" data-owner-editable>2024</span></div>
           </div>
-            <p class="srv-roles" data-owner-editable>SS Manager y Manager</p>
+          <p class="srv-roles" data-owner-editable>SS Manager y Manager</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
@@ -450,6 +444,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
+  <!-- 3 LOGROS -->
   <section class="achievements card" id="achSection" data-owner-block>
     <h2 class="section-title" data-owner-editable><i class="fa-solid fa-trophy"></i> Logros</h2>
     <div class="ach-lists">
@@ -474,6 +469,16 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
+  <!-- 4 STATS -->
+  <section class="stats card" id="statsSection" data-owner-block>
+    <div class="stat-chip" data-owner-editable>All Servers <strong>+6</strong></div>
+    <div class="stat-chip" data-owner-editable>SS Experience <strong>+2 Years</strong></div>
+    <div class="stat-chip" data-owner-editable>SS Manager Experience <strong>1 Year</strong></div>
+    <div class="stat-chip" data-owner-editable>Cases Reviewed <strong>120+</strong></div>
+    <div class="stat-chip" id="viewsChip" data-owner-editable>Views <strong id="viewsValue">—</strong></div>
+  </section>
+
+  <!-- 5 MÚSICA -->
   <section class="music card" data-owner-block>
     <h2 class="section-title" data-owner-editable><i class="fa-solid fa-music"></i> Música</h2>
     <div class="music-simple">
@@ -496,6 +501,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
+  <!-- 6 PANELES -->
   <section class="panel-grid" data-owner-block>
     <div class="panels-horizontal" id="panelsRow">
       <div class="card mini-panel" id="panelDoing">
@@ -578,11 +584,13 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
+  <!-- 7 FOOTER -->
   <footer class="footer" data-owner-block data-owner-editable>
     © <span id="year"></span> BestArcher_. All rights reserved.
   </footer>
 </main>
 
+<!-- MODAL -->
 <div id="serverOverlay" aria-hidden="true">
   <div class="server-modal-box" role="dialog" aria-modal="true">
     <button class="modal-close" id="closeServerModal" type="button" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
@@ -603,6 +611,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
   </div>
 </div>
 
+<!-- SETTINGS -->
 <div id="settingsPanel" aria-hidden="true">
   <button id="settingsClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
   <h3>Settings</h3>
@@ -1250,7 +1259,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-/* CLEAN stray dots (por estética) */
+/* CLEAN stray dots */
 (function cleanDots(){
   const junk=/^([.·•])+$/;const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
   const kill=[];while(walker.nextNode()){const n=walker.currentNode;if(junk.test(n.textContent.trim())) kill.push(n);}
