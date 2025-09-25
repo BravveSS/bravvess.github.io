@@ -118,7 +118,7 @@ font-size:.85rem;font-weight:600;cursor:pointer;transition:transform .26s,border
 .section-title{margin:0 0 24px;font-size:1.26rem;letter-spacing:.55px;font-weight:600;display:flex;align-items:center;gap:10px;cursor:default}
 .section-title[contenteditable="true"]{outline:2px solid rgba(255,255,255,.5)}
 
-/* DRAG highlight for blocks */
+/* DRAG highlight */
 .owner-mode [data-owner-block]{position:relative}
 .owner-mode [data-owner-block]:hover{outline:1px dashed rgba(255,255,255,.35)}
 .owner-mode [data-owner-block].dragging{opacity:.35;outline:2px dashed rgba(255,255,255,.55)}
@@ -207,7 +207,7 @@ transition:transform .26s,background .26s;display:inline-flex;align-items:center
 .owner-mode [data-owner-editable]:hover{outline:1px dashed rgba(255,255,255,.35)}
 .owner-mode [contenteditable="true"]{outline:2px solid rgba(255,255,255,.55)!important;border-radius:6px;padding:2px 4px}
 
-/* MODES HIDE */
+/* MODES */
 .clean-mode .servers,
 .clean-mode .achievements,
 .clean-mode .music,
@@ -241,7 +241,7 @@ transition:transform .26s,background .26s;display:inline-flex;align-items:center
 .mode-btn.is-active{background:linear-gradient(180deg,rgba(120,200,255,.38),rgba(120,200,255,.15));
   box-shadow:0 0 0 1px rgba(120,200,255,.7),0 0 14px -2px rgba(120,200,255,.9);border-color:rgba(120,200,255,.7)}
 
-/* OVERLAY MODAL (custom) */
+/* MODAL */
 #serverOverlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:220;background:rgba(0,0,0,.55);backdrop-filter:blur(8px)}
 #serverOverlay.open{display:flex}
 .server-modal-box{width:min(92vw,720px);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:30px;
@@ -330,16 +330,19 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
 
 <main class="page" id="appRoot">
 
-  <header class="hero card" data-owner-block>
+  <!-- 1 PERFIL -->
+  <header class="hero card" id="heroSection" data-owner-block>
     <div class="avatar-wrap">
       <img class="avatar" src="assets/profile.jpg" alt="Perfil">
     </div>
     <div>
       <h1 class="name" data-owner-editable>BestArcher_ <span class="status-dot-inline"></span></h1>
       <p class="bio" data-owner-editable>Learning the best SS method · SS Verify Experience · SS Manager Experience · Staff on DynamicPvP</p>
+
       <div class="social-hub" id="socialHub">
         <div class="social-icons">
           <a class="icon-btn" href="https://namemc.com/profile/BestArcher_" target="_blank"><i class="fa-solid fa-user"></i></a>
+            <!-- Email button (lo mantenemos, quitaste solo la tarjeta) -->
           <a class="icon-btn" href="https://www.instagram.com/tomas_attanzio/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
           <a class="icon-btn" href="https://discord.com/users/1159617478725480580" target="_blank"><i class="fa-brands fa-discord"></i></a>
           <a class="icon-btn" href="https://github.com/BravveSS" target="_blank"><i class="fa-brands fa-github"></i></a>
@@ -348,6 +351,8 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
           <a class="icon-btn" href="https://www.youtube.com/@144_hz" target="_blank"><i class="fa-brands fa-youtube"></i></a>
           <button class="icon-btn" data-copy="tomasattanzioc@gmail.com" title="Copiar correo"><i class="fa-solid fa-envelope"></i></button>
         </div>
+
+        <!-- Tarjetas: Quitada la de Email -->
         <div class="social-grid" id="socialGrid">
           <div class="s-card" data-copy="BestArcher_">
             <div class="s-thumb"><img src="assets/social/discord.png" alt="Discord"></div>
@@ -377,23 +382,12 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
             <div class="s-thumb"><img src="assets/social/youtube.png" alt="YouTube"></div>
             <span data-owner-editable>YouTube</span><small>Channel</small>
           </a>
-          <div class="s-card" data-copy="tomasattanzioc@gmail.com">
-            <div class="s-thumb"><img src="assets/social/email.png" alt="Email"></div>
-            <span data-owner-editable>Email</span><small>Copiar</small>
-          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <section class="stats card" id="statsSection" data-owner-block>
-    <div class="stat-chip" data-owner-editable>All Servers <strong>+6</strong></div>
-    <div class="stat-chip" data-owner-editable>SS Experience <strong>+2 Years</strong></div>
-    <div class="stat-chip" data-owner-editable>SS Manager Experience <strong>1 Year</strong></div>
-    <div class="stat-chip" data-owner-editable>Cases Reviewed <strong>120+</strong></div>
-    <div class="stat-chip" id="viewsChip" data-owner-editable>Views <strong id="viewsValue">—</strong></div>
-  </section>
-
+  <!-- 2 SERVIDORES -->
   <section class="servers card" id="serversSection" data-owner-block>
     <h2 class="section-title" data-owner-editable><i class="fa-solid fa-server"></i> Servidores</h2>
     <div class="grid" id="serversGrid">
@@ -423,7 +417,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
             <div class="srv-logo"><img src="assets/infernalmc.png" alt="InfernalMC"></div>
             <div class="srv-meta"><h3 data-owner-editable>InfernalMC</h3><span class="srv-year" data-owner-editable>2024</span></div>
           </div>
-            <p class="srv-roles" data-owner-editable>SS Manager y Manager</p>
+          <p class="srv-roles" data-owner-editable>SS Manager y Manager</p>
           <button class="srv-btn" type="button"><i class="fa-solid fa-circle-info"></i> Ver más</button>
         </div>
       </article>
@@ -450,6 +444,16 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
+  <!-- (Mantengo STATS debajo de servidores? Tú pediste orden específico sin stats, pero no querías eliminar nada, así que la dejo después de servers y antes de logros, o la coloco al final. Para no romper nada la muevo debajo de servers invisible solo si quieres. Aquí la dejo detrás de servers por si la sigues usando) -->
+  <section class="stats card" id="statsSection" data-owner-block style="order:2">
+    <div class="stat-chip" data-owner-editable>All Servers <strong>+6</strong></div>
+    <div class="stat-chip" data-owner-editable>SS Experience <strong>+2 Years</strong></div>
+    <div class="stat-chip" data-owner-editable>SS Manager Experience <strong>1 Year</strong></div>
+    <div class="stat-chip" data-owner-editable>Cases Reviewed <strong>120+</strong></div>
+    <div class="stat-chip" id="viewsChip" data-owner-editable>Views <strong id="viewsValue">—</strong></div>
+  </section>
+
+  <!-- 3 LOGROS -->
   <section class="achievements card" id="achSection" data-owner-block>
     <h2 class="section-title" data-owner-editable><i class="fa-solid fa-trophy"></i> Logros</h2>
     <div class="ach-lists">
@@ -474,7 +478,21 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
-  <section class="music card" data-owner-block>
+  <!-- 4 CURRENTLY DOING (extraído) -->
+  <section class="card mini-panel" id="panelDoing" data-owner-block>
+    <div class="panel-head">
+      <h3 data-owner-editable>Currently Doing</h3>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button id="startSession" class="btn small" type="button" data-admin><i class="fa-solid fa-play"></i> Start SS</button>
+        <button id="endSession" class="btn small danger" type="button" data-admin><i class="fa-solid fa-stop"></i> End SS</button>
+        <button id="editDoing" class="btn small" type="button" data-admin><i class="fa-solid fa-pen"></i> Edit</button>
+      </div>
+    </div>
+    <div id="doingContent" class="inline-edit" contenteditable="false">Disponible</div>
+  </section>
+
+  <!-- 5 MÚSICA -->
+  <section class="music card" id="musicSection" data-owner-block>
     <h2 class="section-title" data-owner-editable><i class="fa-solid fa-music"></i> Música</h2>
     <div class="music-simple">
       <div id="musicState">Ready: cancion.mp3</div>
@@ -496,20 +514,30 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
     </div>
   </section>
 
-  <section class="panel-grid" data-owner-block>
-    <div class="panels-horizontal" id="panelsRow">
-      <div class="card mini-panel" id="panelDoing">
-        <div class="panel-head">
-          <h3 data-owner-editable>Currently Doing</h3>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button id="startSession" class="btn small" type="button" data-admin><i class="fa-solid fa-play"></i> Start SS</button>
-            <button id="endSession" class="btn small danger" type="button" data-admin><i class="fa-solid fa-stop"></i> End SS</button>
-            <button id="editDoing" class="btn small" type="button" data-admin><i class="fa-solid fa-pen"></i> Edit</button>
-          </div>
-        </div>
-        <div id="doingContent" class="inline-edit" contenteditable="false">Disponible</div>
+  <!-- 6 VIEWS (extraído) -->
+  <section class="card mini-panel" id="panelViews" data-owner-block>
+    <div class="panel-head">
+      <h3 data-owner-editable>Views</h3>
+      <button id="refreshViews" class="btn small" type="button" data-admin title="Actualizar"><i class="fa-solid fa-rotate"></i></button>
+    </div>
+    <div style="font-size:.62rem;line-height:1.5;display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:1.2rem;font-weight:700;letter-spacing:.5px">
+        <span id="viewsDisplayed">—</span>
       </div>
+      <div data-admin id="viewsAdminControls" style="display:none;gap:6px;flex-wrap:wrap">
+        <input id="viewSetInput" type="number" placeholder="Set" style="flex:1;min-width:90px;padding:6px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.58rem">
+        <button id="viewSetBtn" class="btn small" type="button" title="Aplicar"><i class="fa-solid fa-floppy-disk"></i></button>
+        <button id="viewPlus1" class="btn small" type="button" title="+1">+1</button>
+        <button id="viewPlus100" class="btn small" type="button" title="+100">+100</button>
+        <button id="viewReset" class="btn small danger" type="button" title="Reset 0"><i class="fa-solid fa-ban"></i></button>
+      </div>
+    </div>
+  </section>
 
+  <!-- RESTO DE PANELES (no eliminados) -->
+  <section class="panel-grid" id="extraPanels" data-owner-block>
+    <div class="panels-horizontal" id="panelsRow" style="flex-wrap:wrap;gap:20px">
+      <!-- Los que permanecen (ya no incluyen Doing ni Views) -->
       <div class="card mini-panel" id="panelObjectives">
         <div class="panel-head">
           <h3 data-owner-editable>Próximos Objetivos</h3>
@@ -546,43 +574,26 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
         <div class="last-update" id="lastUpdateLabel">—</div>
         <div class="last-update" id="lastUpdateRelative" style="opacity:.75"></div>
       </div>
-    </div>
 
-    <div style="display:flex;flex-wrap:wrap;gap:20px">
       <div class="card mini-panel" id="panelGallery" style="flex:1 1 300px">
         <div class="panel-head"><h3 data-owner-editable>Evidencias</h3></div>
         <div class="placeholder-box" data-owner-editable>PROXIMAMENTE...</div>
       </div>
+
       <div class="card mini-panel" id="panelTools" style="flex:1 1 300px">
         <div class="panel-head"><h3 data-owner-editable>Herramientas</h3></div>
         <div class="placeholder-box" data-owner-editable>PROXIMAMENTE...</div>
       </div>
-      <div class="card mini-panel" id="panelViews" style="flex:1 1 300px">
-        <div class="panel-head">
-          <h3 data-owner-editable>Views</h3>
-          <button id="refreshViews" class="btn small" type="button" data-admin title="Actualizar"><i class="fa-solid fa-rotate"></i></button>
-        </div>
-        <div style="font-size:.62rem;line-height:1.5;display:flex;flex-direction:column;gap:10px">
-          <div style="font-size:1.2rem;font-weight:700;letter-spacing:.5px">
-            <span id="viewsDisplayed">—</span>
-          </div>
-          <div data-admin id="viewsAdminControls" style="display:none;gap:6px;flex-wrap:wrap">
-            <input id="viewSetInput" type="number" placeholder="Set" style="flex:1;min-width:90px;padding:6px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.58rem">
-            <button id="viewSetBtn" class="btn small" type="button" title="Aplicar"><i class="fa-solid fa-floppy-disk"></i></button>
-            <button id="viewPlus1" class="btn small" type="button" title="+1">+1</button>
-            <button id="viewPlus100" class="btn small" type="button" title="+100">+100</button>
-            <button id="viewReset" class="btn small danger" type="button" title="Reset 0"><i class="fa-solid fa-ban"></i></button>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <footer class="footer" data-owner-block data-owner-editable>
+  <!-- 7 COPYRIGHT -->
+  <footer class="footer" id="footerSection" data-owner-block data-owner-editable>
     © <span id="year"></span> BestArcher_. All rights reserved.
   </footer>
 </main>
 
+<!-- MODAL SERVERS -->
 <div id="serverOverlay" aria-hidden="true">
   <div class="server-modal-box" role="dialog" aria-modal="true">
     <button class="modal-close" id="closeServerModal" type="button" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
@@ -603,6 +614,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
   </div>
 </div>
 
+<!-- SETTINGS -->
 <div id="settingsPanel" aria-hidden="true">
   <button id="settingsClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
   <h3>Settings</h3>
@@ -647,17 +659,13 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
   <button id="settingsSave" class="btn small">Guardar</button>
 </div>
 
-<div id="debugPanel">
-  <strong>DEBUG</strong>
-  <pre id="debugLog"></pre>
-</div>
-
+<div id="debugPanel"><strong>DEBUG</strong><pre id="debugLog"></pre></div>
 <div id="toast" role="status"></div>
 
 <script>
 /* =============== CONFIG PASSWORDS =============== */
-const ADMIN_HASH = "8d1a714fdc290c65b183a88f7d3b474634579ac6b73b8cdaf704490049591484"; // (sha256 de tu clave admin previa)
-const OWNER_PASSWORD = "BestOwner2025"; // <- CAMBIA ESTO SI QUIERES OTRA CONTRASEÑA FIJA
+const ADMIN_HASH = "8d1a714fdc290c65b183a88f7d3b474634579ac6b73b8cdaf704490049591484"; // hash admin
+const OWNER_PASSWORD = "BestOwner2025"; // contraseña owner (texto plano)
 
 /* =============== FLAGS =============== */
 let isAdmin=false,isOwner=false,globalEdit=false;
@@ -753,13 +761,10 @@ const ORDER_SECTIONS_KEY='ba_order_sections';
 let dragSrcEl=null;
 
 function enableDragAll(){
-  // Servidores
   $$('#serversGrid .srv-card').forEach(card=>prepDraggable(card,'server'));
-  // Panels
-  $$('#panelsRow .mini-panel').forEach(p=>prepDraggable(p,'panel'));
-  // Stats chips
+  $$('#extraPanels .mini-panel, #panelDoing, #panelViews').forEach(p=>prepDraggable(p,'panel'));
   $$('#statsSection .stat-chip').forEach(ch=>prepDraggable(ch,'stat'));
-  // Secciones top-level (#appRoot direct children que tengan data-owner-block o card)
+  // top-level sections
   $('#appRoot').childNodes.forEach(node=>{
     if(node.nodeType===1 && node.matches('[data-owner-block], .card')){
       node.setAttribute('data-owner-block','');
@@ -769,7 +774,7 @@ function enableDragAll(){
 }
 function disableDragAll(){
   document.querySelectorAll('.dragging').forEach(e=>e.classList.remove('dragging'));
-  const all=[...$$('#serversGrid .srv-card'),...$$('#panelsRow .mini-panel'),...$$('#statsSection .stat-chip'),...$('#appRoot').children];
+  const all=[...document.querySelectorAll('[draggable]')];
   all.forEach(el=>{
     el.removeAttribute('draggable');
     el.removeEventListener('dragstart',dragStart);
@@ -810,24 +815,18 @@ function dragEnd(){
   saveOrders();
 }
 function saveOrders(){
-  // Servers
   const srvOrder=$$('#serversGrid .srv-card').map(c=>c.dataset.name||c.querySelector('h3')?.textContent?.trim());
   localStorage.setItem(ORDER_SERVERS_KEY,JSON.stringify(srvOrder));
-  // Panels
-  const pnlOrder=$$('#panelsRow .mini-panel').map(p=>p.id);
+  const pnlOrder=[...document.querySelectorAll('#panelDoing,#panelViews,#extraPanels .mini-panel')].map(p=>p.id);
   localStorage.setItem(ORDER_PANELS_KEY,JSON.stringify(pnlOrder));
-  // Stats
-  const statsOrder=$$('#statsSection .stat-chip').map((c,i)=>c.dataset.oid||('stat_'+i));
-  // Asignar oid si no estaban
   $$('#statsSection .stat-chip').forEach(ch=>{if(!ch.dataset.oid) ch.dataset.oid='stat_'+Math.random().toString(36).slice(2,8);});
-  const finalStats=$$('#statsSection .stat-chip').map(ch=>ch.dataset.oid);
-  localStorage.setItem(ORDER_STATS_KEY,JSON.stringify(finalStats));
-  // Sections
+  const statsOrder=$$('#statsSection .stat-chip').map(ch=>ch.dataset.oid);
+  localStorage.setItem(ORDER_STATS_KEY,JSON.stringify(statsOrder));
   const secOrder=[...$('#appRoot').children].map(sec=>sec.id||sec.className||'node');
   localStorage.setItem(ORDER_SECTIONS_KEY,JSON.stringify(secOrder));
 }
 function restoreOrders(){
-  // Servers
+  // servers
   const srvOrder=JSON.parse(localStorage.getItem(ORDER_SERVERS_KEY)||'[]');
   if(srvOrder.length){
     const grid=$("#serversGrid");
@@ -836,25 +835,33 @@ function restoreOrders(){
       if(card) grid.appendChild(card);
     });
   }
-  // Panels
+  // panels
   const pnlOrder=JSON.parse(localStorage.getItem(ORDER_PANELS_KEY)||'[]');
   if(pnlOrder.length){
-    const row=$("#panelsRow");
     pnlOrder.forEach(id=>{
-      const panel=$('#'+CSS.escape(id)); if(panel) row.appendChild(panel);
+      const el=document.getElementById(id);
+      if(!el) return;
+      if(id==='panelDoing'){
+        // keep order where it is (already placed)
+        $('#panelDoing') && $('#panelDoing').parentElement.appendChild(el);
+      }else if(id==='panelViews'){
+        $('#panelViews') && $('#panelViews').parentElement.appendChild(el);
+      }else{
+        const container=$("#extraPanels .panels-horizontal")||$("#extraPanels");
+        container && container.appendChild(el);
+      }
     });
   }
-  // Stats
+  // stats
   const statsOrder=JSON.parse(localStorage.getItem(ORDER_STATS_KEY)||'[]');
   if(statsOrder.length){
     const statSection=$("#statsSection");
-    const chips=$$('#statsSection .stat-chip');
     statsOrder.forEach(oid=>{
-      const chip=chips.find(ch=>ch.dataset.oid===oid);
+      const chip=[...statSection.querySelectorAll('.stat-chip')].find(ch=>ch.dataset.oid===oid);
       if(chip) statSection.appendChild(chip);
     });
   }
-  // Sections
+  // sections
   const secOrder=JSON.parse(localStorage.getItem(ORDER_SECTIONS_KEY)||'[]');
   if(secOrder.length){
     const root=$("#appRoot");
@@ -865,21 +872,20 @@ function restoreOrders(){
   }
 }
 
-/* =============== EMOJI SPACING =============== */
+/* EMOJI SPACING */
 function fixEmojiSpacingText(str){
   return str.replace(/([\p{Extended_Pictographic}])(?=[^\s\p{Extended_Pictographic}])/gu,'$1 ').replace(/ {2,}/g,' ');
 }
 function fixEmojiSpacing(root=document.body){
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
-  const nodes=[];
-  while(walker.nextNode()) nodes.push(walker.currentNode);
+  const nodes=[];while(walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach(n=>{
     if(n.parentElement && ['INPUT','TEXTAREA'].includes(n.parentElement.tagName)) return;
     const t=n.textContent;const f=fixEmojiSpacingText(t);if(f!==t) n.textContent=f;
   });
 }
 
-/* =============== SETTINGS STATE =============== */
+/* SETTINGS */
 const STORAGE_KEY='ba_final_custom_settings_v10';
 const defaults={bgMode:'car',bgImageUrl:'',tilt:true,cursor:'minimal',musicAutoplay:true,musicInitVol:0.65,dynamicBG:false,cleanMode:false,streamMode:false,logoCover:true};
 let settings;try{settings={...defaults,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}}catch{settings={...defaults}}
@@ -1152,6 +1158,8 @@ function relativeFormat(ts){
   const h=Math.floor(m/60);if(h<24)return'hace '+h+'h';
   const d=Math.floor(h/24);return'hace '+d+'d';
 }
+
+/* RELATIVE LOOP */
 function loopRelative(){const t=localStorage.getItem(K_LASTUPDATE);if(t)lastUpdateRel.textContent=relativeFormat(+t);requestAnimationFrame(loopRelative);}
 
 /* MODES */
@@ -1250,7 +1258,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-/* CLEAN stray dots (por estética) */
+/* CLEAN stray dots */
 (function cleanDots(){
   const junk=/^([.·•])+$/;const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
   const kill=[];while(walker.nextNode()){const n=walker.currentNode;if(junk.test(n.textContent.trim())) kill.push(n);}
@@ -1270,8 +1278,7 @@ $("#entry").addEventListener('click',()=>{
   initViews();fixEmojiSpacing();
 },{once:true});
 
-/* RELATIVE LOOP */
-function loopRelative(){const t=localStorage.getItem(K_LASTUPDATE);if(t)lastUpdateRel.textContent=relativeFormat(+t);requestAnimationFrame(loopRelative);}
+/* RELATIVE LOOP START */
 loopRelative();
 
 /* INIT */
