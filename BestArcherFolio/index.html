@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -355,7 +356,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
           <a class="icon-btn" href="https://namemc.com/profile/BestArcher_" target="_blank"><i class="fa-solid fa-user"></i></a>
           <a class="icon-btn" href="https://www.instagram.com/tomas_attanzio/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
           <a class="icon-btn" href="https://discord.com/users/1159617478725480580" target="_blank"><i class="fa-brands fa-discord"></i></a>
-          <a class="icon-btn" href="https://github.com/BravveSS" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a class="icon-btn" href="https://github.com/BravveSS" target="_blank"><i class="fa-brands fa-github"></i></a>
           <a class="icon-btn" href="https://www.paypal.com/paypalme/my/profile" target="_blank"><i class="fa-brands fa-paypal"></i></a>
           <a class="icon-btn" href="https://www.tiktok.com/@tomasattanzio" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
           <a class="icon-btn" href="https://www.youtube.com/@144_hz" target="_blank"><i class="fa-brands fa-youtube"></i></a>
@@ -375,7 +376,7 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
             <div class="s-thumb"><img src="assets/social/instagram.png" onerror="this.remove()"></div>
             <span>Instagram</span><small>Ver</small>
           </a>
-            <a class="s-card" href="https://www.paypal.com/paypalme/my/profile" target="_blank">
+          <a class="s-card" href="https://www.paypal.com/paypalme/my/profile" target="_blank">
             <div class="s-thumb"><img src="assets/social/paypal.png" onerror="this.remove()"></div>
             <span>PayPal</span><small>Support</small>
           </a>
@@ -580,20 +581,20 @@ width:10px;height:10px;pointer-events:none;animation:ripple .6s ease-out forward
 
       <div class="card mini-panel" id="panelViews" style="flex:1 1 300px">
         <div class="panel-head">
-          <h3>Visitas</h3>
-          <button id="refreshViews" class="btn small" type="button" data-admin title="Sync"><i class="fa-solid fa-rotate"></i></button>
+          <h3>Views</h3>
+          <button id="refreshViews" class="btn small" type="button" data-admin title="Actualizar"><i class="fa-solid fa-rotate"></i></button>
         </div>
-        <div style="font-size:.62rem;line-height:1.5;display:flex;flex-direction:column;gap:6px">
-          <div><strong>Reales:</strong> <span id="viewsReal">—</span></div>
-          <div><strong>Offset:</strong> <span id="viewsOffsetLabel">0</span> <span data-admin style="display:none">(editable abajo)</span></div>
-          <div><strong>Total mostrado:</strong> <span id="viewsDisplayed">—</span></div>
-          <div data-admin style="display:none;gap:6px;flex-wrap:wrap" id="viewsAdminControls">
-            <input id="viewOffset" type="number" placeholder="Nuevo offset" style="flex:1;min-width:90px;padding:6px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.58rem">
-            <button id="applyViewOffset" class="btn small" type="button"><i class="fa-solid fa-floppy-disk"></i></button>
-            <button id="addFakeViews" class="btn small" type="button" title="+100 al offset"><i class="fa-solid fa-plus"></i>100</button>
-            <button id="resetOffset" class="btn small danger" type="button" title="Reset offset"><i class="fa-solid fa-ban"></i></button>
+        <div style="font-size:.62rem;line-height:1.5;display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:1.2rem;font-weight:700;letter-spacing:.5px">
+            <span id="viewsDisplayed">—</span>
           </div>
-          <small style="opacity:.65">El contador real usa CountAPI y sólo suma 1 por navegador cada 6h.</small>
+          <div data-admin id="viewsAdminControls" style="display:none;gap:6px;flex-wrap:wrap">
+            <input id="viewSetInput" type="number" placeholder="Set" style="flex:1;min-width:90px;padding:6px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:.58rem">
+            <button id="viewSetBtn" class="btn small" type="button" title="Aplicar"><i class="fa-solid fa-floppy-disk"></i></button>
+            <button id="viewPlus1" class="btn small" type="button" title="+1">+1</button>
+            <button id="viewPlus100" class="btn small" type="button" title="+100">+100</button>
+            <button id="viewReset" class="btn small danger" type="button" title="Reset 0"><i class="fa-solid fa-ban"></i></button>
+          </div>
         </div>
       </div>
     </div>
@@ -719,8 +720,24 @@ function ripple(e,btn){
   btn.appendChild(r);r.addEventListener('animationend',()=>r.remove());setTimeout(()=>r.remove(),700);
 }
 
+/* EMOJI SPACING */
+function fixEmojiSpacingText(str){
+  // Añade espacio después de emojis (Extended_Pictographic) si van pegados a letras/números o a otro emoji seguido de letra
+  return str.replace(/([\p{Extended_Pictographic}])(?=[^\s\p{Extended_Pictographic}])/gu,'$1 ');
+}
+function fixEmojiSpacing(root=document.body){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+  const nodes=[];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n=>{
+    const t=n.textContent;
+    const fixed=fixEmojiSpacingText(t);
+    if(fixed!==t) n.textContent=fixed;
+  });
+}
+
 /* SETTINGS STATE */
-const STORAGE_KEY='ba_final_custom_settings_v7';
+const STORAGE_KEY='ba_final_custom_settings_v8';
 const defaults={bgMode:'car',bgImageUrl:'',tilt:true,cursor:'minimal',musicAutoplay:true,musicInitVol:0.65,dynamicBG:false,cleanMode:false,streamMode:false,logoCover:true};
 let settings;
 try{settings={...defaults,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}}catch{settings={...defaults}}
@@ -733,86 +750,84 @@ const K_CHANGELOG='ba_changelog_list';
 const K_LASTUPDATE='ba_last_update';
 const K_SS_SESSION_START='ba_ss_session_start';
 
-/* VIEW COUNTER KEYS */
+/* VIEWS (CountAPI silencioso) */
 const K_VIEWS_REAL='ba_views_real';
-const K_VIEWS_OFFSET='ba_views_offset';
+const K_VIEWS_ADJ='ba_views_adj';
 const K_VIEWS_LAST_HIT='ba_views_last_hit';
 const VIEW_NAMESPACE='bestarcher_portfolio';
-const VIEW_KEY='global_views_v1';
+const VIEW_KEY='global_views_v2';
 const VIEW_API='https://api.countapi.xyz';
 const VISIT_COOLDOWN_MS=6*60*60*1000; // 6 horas
 let viewsReal=Number(localStorage.getItem(K_VIEWS_REAL)||0);
-let viewsOffset=Number(localStorage.getItem(K_VIEWS_OFFSET)||0);
+let viewsAdj=Number(localStorage.getItem(K_VIEWS_ADJ)||0);
+
+function showViewAdmin(){ $("#viewsAdminControls")?.setAttribute('style','display:flex;gap:6px;flex-wrap:wrap'); }
+function hideViewAdmin(){ $("#viewsAdminControls")?.setAttribute('style','display:none'); }
 
 function updateViewsUI(){
-  $("#viewsReal").textContent=viewsReal;
-  $("#viewsOffsetLabel").textContent=viewsOffset;
-  $("#viewsDisplayed").textContent=viewsReal+viewsOffset;
-  $("#viewsValue").textContent=viewsReal+viewsOffset;
+  const total=viewsReal+viewsAdj;
+  const disp=$("#viewsDisplayed");
+  const chip=$("#viewsValue");
+  if(disp) disp.textContent=total;
+  if(chip) chip.textContent=total;
 }
-function showViewAdmin(){
-  $("#viewsAdminControls")?.setAttribute('style','display:flex;gap:6px;flex-wrap:wrap');
-}
-function hideViewAdmin(){
-  $("#viewsAdminControls")?.setAttribute('style','display:none');
-}
-async function fetchViewCount(hit){
+
+async function fetchView(hit){
   const url = hit
     ? `${VIEW_API}/hit/${VIEW_NAMESPACE}/${VIEW_KEY}`
     : `${VIEW_API}/get/${VIEW_NAMESPACE}/${VIEW_KEY}`;
   try{
-    const res=await fetch(url);
-    if(!res.ok) throw new Error(res.status);
-    const data=await res.json();
+    const r=await fetch(url);
+    if(!r.ok) throw new Error(r.status);
+    const data=await r.json();
     return data.value;
-  }catch(e){
-    log('View API error: '+e);
-    return null;
-  }
+  }catch(e){log('views error '+e);return null;}
 }
+
 async function initViews(){
-  const lastHit=Number(localStorage.getItem(K_VIEWS_LAST_HIT)||0);
   const now=Date.now();
-  const shouldHit = (now-lastHit)>VISIT_COOLDOWN_MS;
-  const val = await fetchViewCount(shouldHit);
+  const last=Number(localStorage.getItem(K_VIEWS_LAST_HIT)||0);
+  const doHit = (now-last)>VISIT_COOLDOWN_MS;
+  const val=await fetchView(doHit);
   if(val!==null){
     viewsReal=val;
     localStorage.setItem(K_VIEWS_REAL,String(viewsReal));
-    if(shouldHit) localStorage.setItem(K_VIEWS_LAST_HIT,String(now));
+    if(doHit) localStorage.setItem(K_VIEWS_LAST_HIT,String(now));
+    updateViewsUI();
   }
-  updateViewsUI();
 }
+
 $("#refreshViews")?.addEventListener('click',async()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  const val=await fetchViewCount(false);
+  const val=await fetchView(false);
   if(val!==null){
-    viewsReal=val;localStorage.setItem(K_VIEWS_REAL,String(viewsReal));
-    toast('Views sincronizado');
-  }else toast('Error sync');
-  updateViewsUI();
+    viewsReal=val;localStorage.setItem(K_VIEWS_REAL,String(val));updateViewsUI();toast('Actualizado');
+  } else toast('Error');
 });
-$("#applyViewOffset")?.addEventListener('click',()=>{
+
+$("#viewSetBtn")?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  const v=Number($("#viewOffset").value||0);
-  viewsOffset=v;
-  localStorage.setItem(K_VIEWS_OFFSET,String(viewsOffset));
-  updateViewsUI();
-  toast('Offset guardado');
+  const target=Number($("#viewSetInput").value||0);
+  if(isNaN(target)) return;
+  // Ajuste: viewsAdj = target - viewsReal
+  viewsAdj=target - viewsReal;
+  localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));
+  updateViewsUI();toast('Set ok');
 });
-$("#addFakeViews")?.addEventListener('click',()=>{
+$("#viewPlus1")?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  viewsOffset+=100;
-  localStorage.setItem(K_VIEWS_OFFSET,String(viewsOffset));
-  updateViewsUI();
-  toast('+100 offset');
+  viewsAdj+=1;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();
 });
-$("#resetOffset")?.addEventListener('click',()=>{
+$("#viewPlus100")?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  if(!confirm('¿Reset offset a 0?'))return;
-  viewsOffset=0;
-  localStorage.setItem(K_VIEWS_OFFSET,'0');
-  updateViewsUI();
-  toast('Offset reseteado');
+  viewsAdj+=100;localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));updateViewsUI();
+});
+$("#viewReset")?.addEventListener('click',()=>{
+  if(!isAdmin){toast('Solo admin');return;}
+  if(!confirm('¿Reset a 0?'))return;
+  viewsAdj= -viewsReal;
+  localStorage.setItem(K_VIEWS_ADJ,String(viewsAdj));
+  updateViewsUI();toast('Reset');
 });
 
 /* BACKGROUND */
@@ -978,8 +993,15 @@ audioEl.addEventListener('pause',updateMusicState);
 
 /* CURRENTLY DOING */
 const doingEl=$("#doingContent"), editDoing=$("#editDoing");
-function loadDoing(){doingEl.textContent=localStorage.getItem(K_DOING)||'Disponible';}
-function saveDoing(){localStorage.setItem(K_DOING, doingEl.textContent.trim()||'Disponible');updateLastUpdate();}
+function loadDoing(){doingEl.textContent=fixEmojiSpacingText(localStorage.getItem(K_DOING)||'Disponible');}
+function saveDoing(){
+  let txt=doingEl.textContent.trim()||'Disponible';
+  txt=fixEmojiSpacingText(txt);
+  doingEl.textContent=txt;
+  localStorage.setItem(K_DOING, txt);
+  updateLastUpdate();
+  fixEmojiSpacing(doingEl);
+}
 editDoing.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
   const editing=doingEl.getAttribute('contenteditable')==='true';
@@ -1037,6 +1059,7 @@ function loadObjectives(){
   const arr=JSON.parse(localStorage.getItem(K_OBJECTIVES)||'[]');
   arr.forEach(o=>renderObjective(o));
   updateObjectivesProgress();
+  fixEmojiSpacing(objList);
 }
 function saveObjectives(){
   const data=[...objList.children].map(li=>({text:li.dataset.text,done:li.classList.contains('done')}));
@@ -1045,24 +1068,26 @@ function saveObjectives(){
 }
 function renderObjective(o){
   const li=document.createElement('li');
-  li.dataset.text=o.text;
+  const textFixed=fixEmojiSpacingText(o.text);
+  li.dataset.text=textFixed;
   if(o.done) li.classList.add('done');
-  li.innerHTML=`<span>${o.text}</span>${isAdmin?'<button class="btn small icon danger" type="button" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>':''}`;
+  li.innerHTML=`<span>${textFixed}</span>${isAdmin?'<button class="btn small icon danger" type="button" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>':''}`;
   li.addEventListener('click',e=>{
     if(!isAdmin)return;
     if(e.target.closest('button')) return;
     li.classList.toggle('done'); saveObjectives(); updateLastUpdate();
   });
-  if(isAdmin) li.querySelector('button')?.addEventListener('click',()=>{li.remove();saveObjectives();updateLastUpdate();});
+  if(isAdmin) li.querySelector('button')?.addEventListener('click',()=>{li.remove(); saveObjectives(); updateLastUpdate();});
   objList.appendChild(li);
 }
 function refreshObjectivesEditButtons(){loadObjectives();}
 objAdd?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  const v=objInput.value.trim(); if(!v)return;
-  renderObjective({text:v,done:false}); saveObjectives(); objInput.value=''; updateLastUpdate();
+  let v=objInput.value.trim(); if(!v)return;
+  v=fixEmojiSpacingText(v);
+  renderObjective({text:v,done:false}); saveObjectives(); objInput.value=''; updateLastUpdate(); fixEmojiSpacing(objList);
 });
-objInput?.addEventListener('keydown',e=>{if(e.key==='Enter')objAdd.click();});
+objInput?.addEventListener('keydown',e=>{if(e.key==='Enter'){objAdd.click();}});
 objClear?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
   if(!confirm('¿Vaciar objetivos?'))return;
@@ -1086,27 +1111,29 @@ function loadChangelog(){
   clList.innerHTML='';
   const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]').sort((a,b)=>b.time-a.time);
   arr.forEach(it=>renderChange(it));
+  fixEmojiSpacing(clList);
 }
 function saveChangelog(arr){localStorage.setItem(K_CHANGELOG,JSON.stringify(arr));}
 function addChangelogEntry(text){
+  text=fixEmojiSpacingText(text);
   const arr=JSON.parse(localStorage.getItem(K_CHANGELOG)||'[]');
   arr.push({text,time:Date.now()});saveChangelog(arr);loadChangelog();
 }
 function renderChange(it){
   const li=document.createElement('li');
-  li.innerHTML=`<span>${it.text}</span><span class="cl-date">${new Date(it.time).toLocaleString()}</span>`;
+  li.innerHTML=`<span>${fixEmojiSpacingText(it.text)}</span><span class="cl-date">${new Date(it.time).toLocaleString()}</span>`;
   clList.appendChild(li);
 }
 clAdd?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
-  const v=clInput.value.trim(); if(!v)return;
+  let v=clInput.value.trim(); if(!v)return;
   addChangelogEntry(v);clInput.value='';updateLastUpdate();
 });
-clInput?.addEventListener('keydown',e=>{if(e.key==='Enter')clAdd.click();});
+clInput?.addEventListener('keydown',e=>{if(e.key==='Enter'){clAdd.click();}});
 clClear?.addEventListener('click',()=>{
   if(!isAdmin){toast('Solo admin');return;}
   if(!confirm('¿Borrar todo el changelog?'))return;
-  localStorage.removeItem(K_CHANGELOG);loadChangelog();
+  localStorage.removeItem(K_CHANGELOG); loadChangelog();
 });
 
 /* LAST UPDATE */
@@ -1136,10 +1163,10 @@ function relativeFormat(ts){
   const d=Math.floor(h/24);
   return 'hace '+d+'d';
 }
-function tickRelative(){
+function loopRelative(){
   const t=localStorage.getItem(K_LASTUPDATE);
   if(t) lastUpdateRel.textContent=relativeFormat(+t);
-  requestAnimationFrame(tickRelative);
+  requestAnimationFrame(loopRelative);
 }
 
 /* MODES */
@@ -1275,16 +1302,12 @@ $("#entry").addEventListener('click',()=>{
     audioEl.play().then(()=>{playBtn.innerHTML='<i class="fa-solid fa-pause"></i> Pause';updateMusicState();})
       .catch(()=>toast('Autoplay bloqueado'));
   }else updateMusicState();
-  // Iniciar contador de vistas tras entrar
   initViews();
+  fixEmojiSpacing();
 },{once:true});
 
-/* LAST UPDATE RELATIVE LOOP */
-function loopRelative(){
-  const t=localStorage.getItem(K_LASTUPDATE);
-  if(t) lastUpdateRel.textContent=relativeFormat(+t);
-  requestAnimationFrame(loopRelative);
-}
+/* RELATIVE LOOP */
+loopRelative();
 
 /* INIT */
 function init(){
@@ -1300,11 +1323,10 @@ function init(){
   audioEl.volume=settings.musicInitVol;
   updateMusicState();
   renderSessionTicker();
-  updateViewsUI(); // muestra placeholder si aún no se hizo hit
-  loopRelative();
+  updateViewsUI();
+  fixEmojiSpacing();
 }
 init();
 </script>
 </body>
-
 </html>
